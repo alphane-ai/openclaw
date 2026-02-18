@@ -1,0 +1,1 @@
+docs/images/feishu-step2-create-app.png

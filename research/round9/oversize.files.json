@@ -1,0 +1,42 @@
+[
+  {
+    "path": "apps/ios/Sources/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+    "size": 1393705,
+    "module": "apps/ios"
+  },
+  {
+    "path": "apps/macos/Icon.icon/Assets/openclaw-mac.png",
+    "size": 1393705,
+    "module": "apps/macos"
+  },
+  {
+    "path": "apps/macos/Sources/OpenClaw/Resources/OpenClaw.icns",
+    "size": 1884490,
+    "module": "apps/macos"
+  },
+  {
+    "path": "assets/dmg-background.png",
+    "size": 1013735,
+    "module": "assets"
+  },
+  {
+    "path": "docs/assets/showcase/oura-health.png",
+    "size": 1254626,
+    "module": "docs"
+  },
+  {
+    "path": "docs/assets/showcase/snag.png",
+    "size": 817148,
+    "module": "docs"
+  },
+  {
+    "path": "docs/images/feishu-step2-create-app.png",
+    "size": 461999,
+    "module": "docs"
+  },
+  {
+    "path": "docs/images/feishu-step4-permissions.png",
+    "size": 413354,
+    "module": "docs"
+  }
+]

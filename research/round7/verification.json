@@ -1,0 +1,17 @@
+{
+  "date": "2026-02-17",
+  "round": "round7",
+  "assignment_files": 993,
+  "chunk_count": 20,
+  "duplicate_assignments": [],
+  "missing_outputs": [],
+  "unfinished_outputs": [],
+  "over_limit_chunks": [],
+  "covered_done": 993,
+  "covered_not_done": [],
+  "covered_missing_rows": [],
+  "status_counts": {
+    "todo": 1663,
+    "done": 3726
+  }
+}

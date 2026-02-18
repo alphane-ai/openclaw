@@ -1,0 +1,240 @@
+{
+  "max_chunk_bytes": 409600,
+  "target_approx": 1000,
+  "modules": [
+    "apps/macos",
+    "apps/android",
+    "apps/ios",
+    "apps/shared",
+    "ui",
+    "scripts",
+    "extensions/open-prose",
+    "Swabble"
+  ],
+  "total_files": 993,
+  "total_bytes": 6751641,
+  "chunk_count": 20,
+  "duplicate_files": [],
+  "chunks": [
+    {
+      "chunk_id": "chunk_001_apps_macos_p01",
+      "module": "apps/macos",
+      "part": 1,
+      "file_count": 60,
+      "total_bytes": 409377,
+      "list_file": "research/round7/assignments/chunk_001_apps_macos_p01.txt",
+      "output_file": "research/round7/chunks/chunk_001_apps_macos_p01.md",
+      "first_path": "apps/macos/Icon.icon/icon.json",
+      "last_path": "apps/macos/Sources/OpenClaw/CronModels.swift"
+    },
+    {
+      "chunk_id": "chunk_002_apps_macos_p02",
+      "module": "apps/macos",
+      "part": 2,
+      "file_count": 41,
+      "total_bytes": 405832,
+      "list_file": "research/round7/assignments/chunk_002_apps_macos_p02.txt",
+      "output_file": "research/round7/chunks/chunk_002_apps_macos_p02.md",
+      "first_path": "apps/macos/Sources/OpenClaw/CronSettings+Actions.swift",
+      "last_path": "apps/macos/Sources/OpenClaw/MenuBar.swift"
+    },
+    {
+      "chunk_id": "chunk_003_apps_macos_p03",
+      "module": "apps/macos",
+      "part": 3,
+      "file_count": 50,
+      "total_bytes": 408466,
+      "list_file": "research/round7/assignments/chunk_003_apps_macos_p03.txt",
+      "output_file": "research/round7/chunks/chunk_003_apps_macos_p03.md",
+      "first_path": "apps/macos/Sources/OpenClaw/MenuContentView.swift",
+      "last_path": "apps/macos/Sources/OpenClaw/Resources/Info.plist"
+    },
+    {
+      "chunk_id": "chunk_004_apps_macos_p04",
+      "module": "apps/macos",
+      "part": 4,
+      "file_count": 57,
+      "total_bytes": 407370,
+      "list_file": "research/round7/assignments/chunk_004_apps_macos_p04.txt",
+      "output_file": "research/round7/chunks/chunk_004_apps_macos_p04.md",
+      "first_path": "apps/macos/Sources/OpenClaw/RuntimeLocator.swift",
+      "last_path": "apps/macos/Sources/OpenClawDiscovery/TailscaleNetwork.swift"
+    },
+    {
+      "chunk_id": "chunk_005_apps_macos_p05",
+      "module": "apps/macos",
+      "part": 5,
+      "file_count": 102,
+      "total_bytes": 376066,
+      "list_file": "research/round7/assignments/chunk_005_apps_macos_p05.txt",
+      "output_file": "research/round7/chunks/chunk_005_apps_macos_p05.md",
+      "first_path": "apps/macos/Sources/OpenClawDiscovery/WideAreaGatewayDiscovery.swift",
+      "last_path": "apps/macos/Tests/OpenClawIPCTests/WorkActivityStoreTests.swift"
+    },
+    {
+      "chunk_id": "chunk_006_apps_android_p01",
+      "module": "apps/android",
+      "part": 1,
+      "file_count": 70,
+      "total_bytes": 408500,
+      "list_file": "research/round7/assignments/chunk_006_apps_android_p01.txt",
+      "output_file": "research/round7/chunks/chunk_006_apps_android_p01.md",
+      "first_path": "apps/android/README.md",
+      "last_path": "apps/android/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+      "chunk_id": "chunk_007_apps_android_p02",
+      "module": "apps/android",
+      "part": 2,
+      "file_count": 8,
+      "total_bytes": 371521,
+      "list_file": "research/round7/assignments/chunk_007_apps_android_p02.txt",
+      "output_file": "research/round7/chunks/chunk_007_apps_android_p02.md",
+      "first_path": "apps/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "last_path": "apps/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+      "chunk_id": "chunk_008_apps_android_p03",
+      "module": "apps/android",
+      "part": 3,
+      "file_count": 26,
+      "total_bytes": 402611,
+      "list_file": "research/round7/assignments/chunk_008_apps_android_p03.txt",
+      "output_file": "research/round7/chunks/chunk_008_apps_android_p03.md",
+      "first_path": "apps/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "last_path": "apps/android/gradle/wrapper/gradle-wrapper.properties"
+    },
+    {
+      "chunk_id": "chunk_009_apps_android_p04",
+      "module": "apps/android",
+      "part": 4,
+      "file_count": 3,
+      "total_bytes": 11992,
+      "list_file": "research/round7/assignments/chunk_009_apps_android_p04.txt",
+      "output_file": "research/round7/chunks/chunk_009_apps_android_p04.md",
+      "first_path": "apps/android/gradlew",
+      "last_path": "apps/android/settings.gradle.kts"
+    },
+    {
+      "chunk_id": "chunk_010_apps_ios_p01",
+      "module": "apps/ios",
+      "part": 1,
+      "file_count": 41,
+      "total_bytes": 386278,
+      "list_file": "research/round7/assignments/chunk_010_apps_ios_p01.txt",
+      "output_file": "research/round7/chunks/chunk_010_apps_ios_p01.md",
+      "first_path": "apps/ios/README.md",
+      "last_path": "apps/ios/Sources/Model/NodeAppModel+Canvas.swift"
+    },
+    {
+      "chunk_id": "chunk_011_apps_ios_p02",
+      "module": "apps/ios",
+      "part": 2,
+      "file_count": 51,
+      "total_bytes": 371700,
+      "list_file": "research/round7/assignments/chunk_011_apps_ios_p02.txt",
+      "output_file": "research/round7/chunks/chunk_011_apps_ios_p02.md",
+      "first_path": "apps/ios/Sources/Model/NodeAppModel.swift",
+      "last_path": "apps/ios/project.yml"
+    },
+    {
+      "chunk_id": "chunk_012_apps_shared_p01",
+      "module": "apps/shared",
+      "part": 1,
+      "file_count": 85,
+      "total_bytes": 409085,
+      "list_file": "research/round7/assignments/chunk_012_apps_shared_p01.txt",
+      "output_file": "research/round7/chunks/chunk_012_apps_shared_p01.md",
+      "first_path": "apps/shared/OpenClawKit/Package.swift",
+      "last_path": "apps/shared/OpenClawKit/Tools/CanvasA2UI/rolldown.config.mjs"
+    },
+    {
+      "chunk_id": "chunk_013_ui_p01",
+      "module": "ui",
+      "part": 1,
+      "file_count": 42,
+      "total_bytes": 404551,
+      "list_file": "research/round7/assignments/chunk_013_ui_p01.txt",
+      "output_file": "research/round7/chunks/chunk_013_ui_p01.md",
+      "first_path": "ui/index.html",
+      "last_path": "ui/src/ui/chat/copy-as-markdown.ts"
+    },
+    {
+      "chunk_id": "chunk_014_ui_p02",
+      "module": "ui",
+      "part": 2,
+      "file_count": 87,
+      "total_bytes": 404170,
+      "list_file": "research/round7/assignments/chunk_014_ui_p02.txt",
+      "output_file": "research/round7/chunks/chunk_014_ui_p02.md",
+      "first_path": "ui/src/ui/chat/grouped-render.ts",
+      "last_path": "ui/src/ui/views/chat.ts"
+    },
+    {
+      "chunk_id": "chunk_015_ui_p03",
+      "module": "ui",
+      "part": 3,
+      "file_count": 36,
+      "total_bytes": 368085,
+      "list_file": "research/round7/assignments/chunk_015_ui_p03.txt",
+      "output_file": "research/round7/chunks/chunk_015_ui_p03.md",
+      "first_path": "ui/src/ui/views/config-form.analyze.ts",
+      "last_path": "ui/vitest.node.config.ts"
+    },
+    {
+      "chunk_id": "chunk_016_scripts_p01",
+      "module": "scripts",
+      "part": 1,
+      "file_count": 104,
+      "total_bytes": 404617,
+      "list_file": "research/round7/assignments/chunk_016_scripts_p01.txt",
+      "output_file": "research/round7/chunks/chunk_016_scripts_p01.md",
+      "first_path": "scripts/auth-monitor.sh",
+      "last_path": "scripts/ui.js"
+    },
+    {
+      "chunk_id": "chunk_017_scripts_p02",
+      "module": "scripts",
+      "part": 2,
+      "file_count": 8,
+      "total_bytes": 30012,
+      "list_file": "research/round7/assignments/chunk_017_scripts_p02.txt",
+      "output_file": "research/round7/chunks/chunk_017_scripts_p02.md",
+      "first_path": "scripts/update-clawtributors.ts",
+      "last_path": "scripts/zai-fallback-repro.ts"
+    },
+    {
+      "chunk_id": "chunk_018_extensions_open-prose_p01",
+      "module": "extensions/open-prose",
+      "part": 1,
+      "file_count": 62,
+      "total_bytes": 407733,
+      "list_file": "research/round7/assignments/chunk_018_extensions_open-prose_p01.txt",
+      "output_file": "research/round7/chunks/chunk_018_extensions_open-prose_p01.md",
+      "first_path": "extensions/open-prose/README.md",
+      "last_path": "extensions/open-prose/skills/prose/examples/47-language-self-improvement.prose"
+    },
+    {
+      "chunk_id": "chunk_019_extensions_open-prose_p02",
+      "module": "extensions/open-prose",
+      "part": 2,
+      "file_count": 28,
+      "total_bytes": 300421,
+      "list_file": "research/round7/assignments/chunk_019_extensions_open-prose_p02.txt",
+      "output_file": "research/round7/chunks/chunk_019_extensions_open-prose_p02.md",
+      "first_path": "extensions/open-prose/skills/prose/examples/48-habit-miner.prose",
+      "last_path": "extensions/open-prose/skills/prose/state/sqlite.md"
+    },
+    {
+      "chunk_id": "chunk_020_Swabble_p01",
+      "module": "Swabble",
+      "part": 1,
+      "file_count": 32,
+      "total_bytes": 63254,
+      "list_file": "research/round7/assignments/chunk_020_Swabble_p01.txt",
+      "output_file": "research/round7/chunks/chunk_020_Swabble_p01.md",
+      "first_path": "Swabble/CHANGELOG.md",
+      "last_path": "Swabble/scripts/lint.sh"
+    }
+  ]
+}

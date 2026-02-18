@@ -1,0 +1,219 @@
+{
+  "max_chunk_bytes": 409600,
+  "target_approx": 1000,
+  "modules": [
+    "src/commands",
+    "src/auto-reply",
+    "src/cli",
+    "src/discord",
+    "src/web",
+    "src/slack",
+    "src/infra",
+    "src/line",
+    "src/signal"
+  ],
+  "total_files": 1007,
+  "total_bytes": 5562863,
+  "chunk_count": 18,
+  "duplicate_files": [],
+  "chunks": [
+    {
+      "chunk_id": "chunk_001_src_commands_p01",
+      "module": "src/commands",
+      "part": 1,
+      "file_count": 75,
+      "total_bytes": 408024,
+      "list_file": "research/round6/assignments/chunk_001_src_commands_p01.txt",
+      "output_file": "research/round6/chunks/chunk_001_src_commands_p01.md",
+      "first_path": "src/commands/agent-via-gateway.e2e.test.ts",
+      "last_path": "src/commands/configure.gateway-auth.e2e.test.ts"
+    },
+    {
+      "chunk_id": "chunk_002_src_commands_p02",
+      "module": "src/commands",
+      "part": 2,
+      "file_count": 73,
+      "total_bytes": 394247,
+      "list_file": "research/round6/assignments/chunk_002_src_commands_p02.txt",
+      "output_file": "research/round6/chunks/chunk_002_src_commands_p02.md",
+      "first_path": "src/commands/configure.gateway-auth.ts",
+      "last_path": "src/commands/models/list.registry.ts"
+    },
+    {
+      "chunk_id": "chunk_003_src_commands_p03",
+      "module": "src/commands",
+      "part": 3,
+      "file_count": 74,
+      "total_bytes": 408747,
+      "list_file": "research/round6/assignments/chunk_003_src_commands_p03.txt",
+      "output_file": "research/round6/chunks/chunk_003_src_commands_p03.md",
+      "first_path": "src/commands/models/list.status-command.ts",
+      "last_path": "src/commands/sandbox.ts"
+    },
+    {
+      "chunk_id": "chunk_004_src_commands_p04",
+      "module": "src/commands",
+      "part": 4,
+      "file_count": 31,
+      "total_bytes": 177515,
+      "list_file": "research/round6/assignments/chunk_004_src_commands_p04.txt",
+      "output_file": "research/round6/chunks/chunk_004_src_commands_p04.md",
+      "first_path": "src/commands/sessions.e2e.test.ts",
+      "last_path": "src/commands/zai-endpoint-detect.ts"
+    },
+    {
+      "chunk_id": "chunk_005_src_auto-reply_p01",
+      "module": "src/auto-reply",
+      "part": 1,
+      "file_count": 66,
+      "total_bytes": 393035,
+      "list_file": "research/round6/assignments/chunk_005_src_auto-reply_p01.txt",
+      "output_file": "research/round6/chunks/chunk_005_src_auto-reply_p01.md",
+      "first_path": "src/auto-reply/chunk.test.ts",
+      "last_path": "src/auto-reply/reply/abort.ts"
+    },
+    {
+      "chunk_id": "chunk_006_src_auto-reply_p02",
+      "module": "src/auto-reply",
+      "part": 2,
+      "file_count": 47,
+      "total_bytes": 408389,
+      "list_file": "research/round6/assignments/chunk_006_src_auto-reply_p02.txt",
+      "output_file": "research/round6/chunks/chunk_006_src_auto-reply_p02.md",
+      "first_path": "src/auto-reply/reply/agent-runner-execution.ts",
+      "last_path": "src/auto-reply/reply/directive-handling.params.ts"
+    },
+    {
+      "chunk_id": "chunk_007_src_auto-reply_p03",
+      "module": "src/auto-reply",
+      "part": 3,
+      "file_count": 66,
+      "total_bytes": 404603,
+      "list_file": "research/round6/assignments/chunk_007_src_auto-reply_p03.txt",
+      "output_file": "research/round6/chunks/chunk_007_src_auto-reply_p03.md",
+      "first_path": "src/auto-reply/reply/directive-handling.parse.ts",
+      "last_path": "src/auto-reply/reply/session-run-accounting.ts"
+    },
+    {
+      "chunk_id": "chunk_008_src_auto-reply_p04",
+      "module": "src/auto-reply",
+      "part": 4,
+      "file_count": 24,
+      "total_bytes": 165805,
+      "list_file": "research/round6/assignments/chunk_008_src_auto-reply_p04.txt",
+      "output_file": "research/round6/chunks/chunk_008_src_auto-reply_p04.md",
+      "first_path": "src/auto-reply/reply/session-updates.ts",
+      "last_path": "src/auto-reply/types.ts"
+    },
+    {
+      "chunk_id": "chunk_009_src_cli_p01",
+      "module": "src/cli",
+      "part": 1,
+      "file_count": 83,
+      "total_bytes": 406221,
+      "list_file": "research/round6/assignments/chunk_009_src_cli_p01.txt",
+      "output_file": "research/round6/chunks/chunk_009_src_cli_p01.md",
+      "first_path": "src/cli/acp-cli.ts",
+      "last_path": "src/cli/hooks-cli.test.ts"
+    },
+    {
+      "chunk_id": "chunk_010_src_cli_p02",
+      "module": "src/cli",
+      "part": 2,
+      "file_count": 84,
+      "total_bytes": 404677,
+      "list_file": "research/round6/assignments/chunk_010_src_cli_p02.txt",
+      "output_file": "research/round6/chunks/chunk_010_src_cli_p02.md",
+      "first_path": "src/cli/hooks-cli.ts",
+      "last_path": "src/cli/progress.test.ts"
+    },
+    {
+      "chunk_id": "chunk_011_src_cli_p03",
+      "module": "src/cli",
+      "part": 3,
+      "file_count": 29,
+      "total_bytes": 147284,
+      "list_file": "research/round6/assignments/chunk_011_src_cli_p03.txt",
+      "output_file": "research/round6/chunks/chunk_011_src_cli_p03.md",
+      "first_path": "src/cli/progress.ts",
+      "last_path": "src/cli/windows-argv.ts"
+    },
+    {
+      "chunk_id": "chunk_012_src_discord_p01",
+      "module": "src/discord",
+      "part": 1,
+      "file_count": 44,
+      "total_bytes": 399609,
+      "list_file": "research/round6/assignments/chunk_012_src_discord_p01.txt",
+      "output_file": "research/round6/chunks/chunk_012_src_discord_p01.md",
+      "first_path": "src/discord/accounts.ts",
+      "last_path": "src/discord/monitor/provider.skill-dedupe.test.ts"
+    },
+    {
+      "chunk_id": "chunk_013_src_discord_p02",
+      "module": "src/discord",
+      "part": 2,
+      "file_count": 34,
+      "total_bytes": 192181,
+      "list_file": "research/round6/assignments/chunk_013_src_discord_p02.txt",
+      "output_file": "research/round6/chunks/chunk_013_src_discord_p02.md",
+      "first_path": "src/discord/monitor/provider.ts",
+      "last_path": "src/discord/voice-message.ts"
+    },
+    {
+      "chunk_id": "chunk_014_src_web_p01",
+      "module": "src/web",
+      "part": 1,
+      "file_count": 78,
+      "total_bytes": 389669,
+      "list_file": "research/round6/assignments/chunk_014_src_web_p01.txt",
+      "output_file": "research/round6/chunks/chunk_014_src_web_p01.md",
+      "first_path": "src/web/accounts.test.ts",
+      "last_path": "src/web/vcard.ts"
+    },
+    {
+      "chunk_id": "chunk_015_src_slack_p01",
+      "module": "src/slack",
+      "part": 1,
+      "file_count": 62,
+      "total_bytes": 307009,
+      "list_file": "research/round6/assignments/chunk_015_src_slack_p01.txt",
+      "output_file": "research/round6/chunks/chunk_015_src_slack_p01.md",
+      "first_path": "src/slack/accounts.ts",
+      "last_path": "src/slack/types.ts"
+    },
+    {
+      "chunk_id": "chunk_016_src_infra_p01",
+      "module": "src/infra",
+      "part": 1,
+      "file_count": 61,
+      "total_bytes": 191569,
+      "list_file": "research/round6/assignments/chunk_016_src_infra_p01.txt",
+      "output_file": "research/round6/chunks/chunk_016_src_infra_p01.md",
+      "first_path": "src/infra/abort-pattern.test.ts",
+      "last_path": "src/infra/wsl.ts"
+    },
+    {
+      "chunk_id": "chunk_017_src_line_p01",
+      "module": "src/line",
+      "part": 1,
+      "file_count": 46,
+      "total_bytes": 211675,
+      "list_file": "research/round6/assignments/chunk_017_src_line_p01.txt",
+      "output_file": "research/round6/chunks/chunk_017_src_line_p01.md",
+      "first_path": "src/line/accounts.test.ts",
+      "last_path": "src/line/webhook.ts"
+    },
+    {
+      "chunk_id": "chunk_018_src_signal_p01",
+      "module": "src/signal",
+      "part": 1,
+      "file_count": 30,
+      "total_bytes": 152604,
+      "list_file": "research/round6/assignments/chunk_018_src_signal_p01.txt",
+      "output_file": "research/round6/chunks/chunk_018_src_signal_p01.md",
+      "first_path": "src/signal/accounts.ts",
+      "last_path": "src/signal/sse-reconnect.ts"
+    }
+  ]
+}

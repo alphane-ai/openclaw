@@ -1,0 +1,1 @@
+apps/ios/Sources/Assets.xcassets/AppIcon.appiconset/icon-1024.png

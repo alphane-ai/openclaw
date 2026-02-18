@@ -1,0 +1,6 @@
+docs/assets/showcase/wine-cellar-skill.jpg
+docs/assets/showcase/winix-air-purifier.jpg
+docs/assets/showcase/xuezh-pronunciation.jpeg
+docs/automation/auth-monitoring.md
+docs/automation/cron-jobs.md
+docs/automation/cron-vs-heartbeat.md

@@ -1,0 +1,4 @@
+docs/assets/openclaw-logo-text-dark.png
+docs/assets/openclaw-logo-text.png
+docs/assets/pixel-lobster.svg
+docs/assets/showcase/agents-ui.jpg

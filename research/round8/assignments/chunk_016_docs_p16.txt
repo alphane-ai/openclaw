@@ -1,0 +1,1 @@
+docs/images/feishu-step3-credentials.png

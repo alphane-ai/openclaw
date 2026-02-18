@@ -1,0 +1,10 @@
+AGENTS.md
+CHANGELOG.md
+CONTRIBUTING.md
+Dockerfile
+Dockerfile.sandbox
+Dockerfile.sandbox-browser
+Dockerfile.sandbox-common
+LICENSE
+README.md
+SECURITY.md

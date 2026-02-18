@@ -1,0 +1,3 @@
+docs/assets/showcase/pr-review-telegram.jpg
+docs/assets/showcase/roborock-screenshot.jpg
+docs/assets/showcase/roborock-status.svg

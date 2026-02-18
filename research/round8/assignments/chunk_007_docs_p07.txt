@@ -1,0 +1,2 @@
+docs/assets/showcase/bambu-cli.png
+docs/assets/showcase/codexmonitor.png

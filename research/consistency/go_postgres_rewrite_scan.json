@@ -1,0 +1,1933 @@
+{
+  "scan_date": "2026-02-17",
+  "total_done_files": 5389,
+  "scored_modules": 98,
+  "reason_totals": {
+    "fs_write": 4548,
+    "ws_hotpath": 8532,
+    "lock_cache": 8214,
+    "jsonl_scan": 1170,
+    "queue_retry": 4364,
+    "fs_read": 1300,
+    "sqlite_local": 515,
+    "sessions_store_core": 130,
+    "gateway_sessions_methods": 8,
+    "gateway_session_utils": 35,
+    "gateway_sessions_resolve": 7,
+    "exec_approvals_core": 36,
+    "outbound_delivery_core": 330,
+    "usage_aggregation_core": 30,
+    "memory_index_pipeline": 441,
+    "pairing_state_store": 30
+  },
+  "top_modules": [
+    {
+      "module": "src/agents",
+      "files": 533,
+      "score": 3926,
+      "hit_files": 532,
+      "top_reasons": [
+        [
+          "lock_cache",
+          1428
+        ],
+        [
+          "fs_write",
+          784
+        ],
+        [
+          "ws_hotpath",
+          674
+        ],
+        [
+          "queue_retry",
+          616
+        ],
+        [
+          "fs_read",
+          224
+        ],
+        [
+          "jsonl_scan",
+          170
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/gateway",
+      "files": 226,
+      "score": 3060,
+      "hit_files": 225,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          1400
+        ],
+        [
+          "lock_cache",
+          756
+        ],
+        [
+          "fs_write",
+          344
+        ],
+        [
+          "queue_retry",
+          312
+        ],
+        [
+          "jsonl_scan",
+          130
+        ],
+        [
+          "fs_read",
+          68
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/infra",
+      "files": 222,
+      "score": 2304,
+      "hit_files": 222,
+      "top_reasons": [
+        [
+          "fs_write",
+          500
+        ],
+        [
+          "lock_cache",
+          456
+        ],
+        [
+          "ws_hotpath",
+          346
+        ],
+        [
+          "queue_retry",
+          340
+        ],
+        [
+          "outbound_delivery_core",
+          330
+        ],
+        [
+          "fs_read",
+          176
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/commands",
+      "files": 263,
+      "score": 1804,
+      "hit_files": 263,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          932
+        ],
+        [
+          "fs_write",
+          364
+        ],
+        [
+          "lock_cache",
+          309
+        ],
+        [
+          "fs_read",
+          84
+        ],
+        [
+          "queue_retry",
+          80
+        ],
+        [
+          "jsonl_scan",
+          30
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "apps/macos",
+      "files": 312,
+      "score": 1800,
+      "hit_files": 302,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          1064
+        ],
+        [
+          "lock_cache",
+          294
+        ],
+        [
+          "queue_retry",
+          268
+        ],
+        [
+          "fs_write",
+          104
+        ],
+        [
+          "jsonl_scan",
+          70
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/memory",
+      "files": 63,
+      "score": 1563,
+      "hit_files": 63,
+      "top_reasons": [
+        [
+          "memory_index_pipeline",
+          441
+        ],
+        [
+          "sqlite_local",
+          335
+        ],
+        [
+          "lock_cache",
+          231
+        ],
+        [
+          "fs_write",
+          184
+        ],
+        [
+          "jsonl_scan",
+          170
+        ],
+        [
+          "queue_retry",
+          132
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/config",
+      "files": 153,
+      "score": 1558,
+      "hit_files": 153,
+      "top_reasons": [
+        [
+          "lock_cache",
+          342
+        ],
+        [
+          "queue_retry",
+          316
+        ],
+        [
+          "fs_write",
+          308
+        ],
+        [
+          "ws_hotpath",
+          250
+        ],
+        [
+          "sessions_store_core",
+          130
+        ],
+        [
+          "fs_read",
+          92
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/auto-reply",
+      "files": 203,
+      "score": 1379,
+      "hit_files": 203,
+      "top_reasons": [
+        [
+          "queue_retry",
+          636
+        ],
+        [
+          "lock_cache",
+          363
+        ],
+        [
+          "fs_write",
+          132
+        ],
+        [
+          "jsonl_scan",
+          100
+        ],
+        [
+          "ws_hotpath",
+          92
+        ],
+        [
+          "fs_read",
+          56
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "src/cli",
+      "files": 198,
+      "score": 1306,
+      "hit_files": 198,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          820
+        ],
+        [
+          "lock_cache",
+          153
+        ],
+        [
+          "fs_write",
+          124
+        ],
+        [
+          "jsonl_scan",
+          105
+        ],
+        [
+          "fs_read",
+          50
+        ],
+        [
+          "sqlite_local",
+          30
+        ]
+      ],
+      "priority": "P0"
+    },
+    {
+      "module": "ui",
+      "files": 165,
+      "score": 854,
+      "hit_files": 146,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          402
+        ],
+        [
+          "lock_cache",
+          252
+        ],
+        [
+          "queue_retry",
+          108
+        ],
+        [
+          "fs_write",
+          92
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "scripts",
+      "files": 112,
+      "score": 655,
+      "hit_files": 94,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          202
+        ],
+        [
+          "lock_cache",
+          159
+        ],
+        [
+          "fs_read",
+          96
+        ],
+        [
+          "fs_write",
+          84
+        ],
+        [
+          "queue_retry",
+          44
+        ],
+        [
+          "sqlite_local",
+          35
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/discord",
+      "files": 78,
+      "score": 595,
+      "hit_files": 78,
+      "top_reasons": [
+        [
+          "queue_retry",
+          208
+        ],
+        [
+          "lock_cache",
+          195
+        ],
+        [
+          "ws_hotpath",
+          152
+        ],
+        [
+          "fs_write",
+          36
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "apps/ios",
+      "files": 93,
+      "score": 564,
+      "hit_files": 70,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          340
+        ],
+        [
+          "queue_retry",
+          104
+        ],
+        [
+          "lock_cache",
+          87
+        ],
+        [
+          "jsonl_scan",
+          25
+        ],
+        [
+          "fs_write",
+          8
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/telegram",
+      "files": 82,
+      "score": 499,
+      "hit_files": 82,
+      "top_reasons": [
+        [
+          "lock_cache",
+          273
+        ],
+        [
+          "queue_retry",
+          196
+        ],
+        [
+          "fs_write",
+          20
+        ],
+        [
+          "fs_read",
+          8
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/browser",
+      "files": 98,
+      "score": 493,
+      "hit_files": 98,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          232
+        ],
+        [
+          "lock_cache",
+          147
+        ],
+        [
+          "fs_write",
+          56
+        ],
+        [
+          "queue_retry",
+          44
+        ],
+        [
+          "fs_read",
+          14
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/web",
+      "files": 78,
+      "score": 459,
+      "hit_files": 78,
+      "top_reasons": [
+        [
+          "lock_cache",
+          153
+        ],
+        [
+          "queue_retry",
+          140
+        ],
+        [
+          "fs_write",
+          104
+        ],
+        [
+          "fs_read",
+          40
+        ],
+        [
+          "ws_hotpath",
+          22
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "apps/android",
+      "files": 107,
+      "score": 457,
+      "hit_files": 80,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          280
+        ],
+        [
+          "lock_cache",
+          135
+        ],
+        [
+          "jsonl_scan",
+          30
+        ],
+        [
+          "fs_write",
+          8
+        ],
+        [
+          "queue_retry",
+          4
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/plugins",
+      "files": 49,
+      "score": 373,
+      "hit_files": 49,
+      "top_reasons": [
+        [
+          "lock_cache",
+          147
+        ],
+        [
+          "fs_write",
+          100
+        ],
+        [
+          "ws_hotpath",
+          86
+        ],
+        [
+          "queue_retry",
+          28
+        ],
+        [
+          "fs_read",
+          12
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/cron",
+      "files": 58,
+      "score": 358,
+      "hit_files": 58,
+      "top_reasons": [
+        [
+          "fs_write",
+          168
+        ],
+        [
+          "lock_cache",
+          63
+        ],
+        [
+          "queue_retry",
+          52
+        ],
+        [
+          "jsonl_scan",
+          35
+        ],
+        [
+          "fs_read",
+          30
+        ],
+        [
+          "ws_hotpath",
+          10
+        ]
+      ],
+      "priority": "P1"
+    },
+    {
+      "module": "src/daemon",
+      "files": 32,
+      "score": 323,
+      "hit_files": 32,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          230
+        ],
+        [
+          "fs_write",
+          60
+        ],
+        [
+          "fs_read",
+          24
+        ],
+        [
+          "lock_cache",
+          9
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/hooks",
+      "files": 36,
+      "score": 293,
+      "hit_files": 31,
+      "top_reasons": [
+        [
+          "fs_write",
+          148
+        ],
+        [
+          "lock_cache",
+          63
+        ],
+        [
+          "ws_hotpath",
+          32
+        ],
+        [
+          "fs_read",
+          32
+        ],
+        [
+          "jsonl_scan",
+          10
+        ],
+        [
+          "queue_retry",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/voice-call",
+      "files": 47,
+      "score": 288,
+      "hit_files": 43,
+      "top_reasons": [
+        [
+          "lock_cache",
+          117
+        ],
+        [
+          "queue_retry",
+          64
+        ],
+        [
+          "ws_hotpath",
+          60
+        ],
+        [
+          "jsonl_scan",
+          35
+        ],
+        [
+          "fs_read",
+          8
+        ],
+        [
+          "fs_write",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/msteams",
+      "files": 65,
+      "score": 282,
+      "hit_files": 62,
+      "top_reasons": [
+        [
+          "lock_cache",
+          126
+        ],
+        [
+          "queue_retry",
+          120
+        ],
+        [
+          "fs_write",
+          28
+        ],
+        [
+          "fs_read",
+          6
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "apps/shared",
+      "files": 85,
+      "score": 271,
+      "hit_files": 83,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          98
+        ],
+        [
+          "queue_retry",
+          72
+        ],
+        [
+          "lock_cache",
+          51
+        ],
+        [
+          "jsonl_scan",
+          50
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/bluebubbles",
+      "files": 33,
+      "score": 270,
+      "hit_files": 30,
+      "top_reasons": [
+        [
+          "lock_cache",
+          204
+        ],
+        [
+          "fs_write",
+          36
+        ],
+        [
+          "queue_retry",
+          16
+        ],
+        [
+          "ws_hotpath",
+          8
+        ],
+        [
+          "fs_read",
+          6
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/media-understanding",
+      "files": 43,
+      "score": 248,
+      "hit_files": 43,
+      "top_reasons": [
+        [
+          "lock_cache",
+          174
+        ],
+        [
+          "fs_write",
+          60
+        ],
+        [
+          "fs_read",
+          10
+        ],
+        [
+          "ws_hotpath",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/media",
+      "files": 26,
+      "score": 196,
+      "hit_files": 26,
+      "top_reasons": [
+        [
+          "fs_write",
+          96
+        ],
+        [
+          "lock_cache",
+          54
+        ],
+        [
+          "fs_read",
+          32
+        ],
+        [
+          "queue_retry",
+          12
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/security",
+      "files": 21,
+      "score": 174,
+      "hit_files": 21,
+      "top_reasons": [
+        [
+          "fs_write",
+          72
+        ],
+        [
+          "ws_hotpath",
+          58
+        ],
+        [
+          "fs_read",
+          38
+        ],
+        [
+          "lock_cache",
+          6
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "test",
+      "files": 22,
+      "score": 171,
+      "hit_files": 15,
+      "top_reasons": [
+        [
+          "lock_cache",
+          69
+        ],
+        [
+          "fs_write",
+          60
+        ],
+        [
+          "ws_hotpath",
+          34
+        ],
+        [
+          "queue_retry",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/nostr",
+      "files": 27,
+      "score": 169,
+      "hit_files": 23,
+      "top_reasons": [
+        [
+          "lock_cache",
+          87
+        ],
+        [
+          "ws_hotpath",
+          46
+        ],
+        [
+          "fs_write",
+          20
+        ],
+        [
+          "queue_retry",
+          12
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/matrix",
+      "files": 71,
+      "score": 158,
+      "hit_files": 68,
+      "top_reasons": [
+        [
+          "lock_cache",
+          105
+        ],
+        [
+          "fs_write",
+          32
+        ],
+        [
+          "ws_hotpath",
+          10
+        ],
+        [
+          "sqlite_local",
+          5
+        ],
+        [
+          "queue_retry",
+          4
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/process",
+      "files": 23,
+      "score": 158,
+      "hit_files": 23,
+      "top_reasons": [
+        [
+          "lock_cache",
+          78
+        ],
+        [
+          "queue_retry",
+          76
+        ],
+        [
+          "fs_write",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/slack",
+      "files": 62,
+      "score": 156,
+      "hit_files": 62,
+      "top_reasons": [
+        [
+          "lock_cache",
+          96
+        ],
+        [
+          "queue_retry",
+          56
+        ],
+        [
+          "fs_write",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/feishu",
+      "files": 48,
+      "score": 156,
+      "hit_files": 41,
+      "top_reasons": [
+        [
+          "lock_cache",
+          84
+        ],
+        [
+          "ws_hotpath",
+          30
+        ],
+        [
+          "queue_retry",
+          20
+        ],
+        [
+          "fs_write",
+          16
+        ],
+        [
+          "fs_read",
+          6
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/channels",
+      "files": 91,
+      "score": 152,
+      "hit_files": 91,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          54
+        ],
+        [
+          "lock_cache",
+          48
+        ],
+        [
+          "fs_write",
+          44
+        ],
+        [
+          "queue_retry",
+          4
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/wizard",
+      "files": 12,
+      "score": 147,
+      "hit_files": 12,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          74
+        ],
+        [
+          "lock_cache",
+          39
+        ],
+        [
+          "fs_write",
+          32
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/mattermost",
+      "files": 24,
+      "score": 144,
+      "hit_files": 22,
+      "top_reasons": [
+        [
+          "lock_cache",
+          54
+        ],
+        [
+          "ws_hotpath",
+          42
+        ],
+        [
+          "queue_retry",
+          40
+        ],
+        [
+          "fs_write",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/tui",
+      "files": 38,
+      "score": 134,
+      "hit_files": 38,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          80
+        ],
+        [
+          "lock_cache",
+          54
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/acp",
+      "files": 12,
+      "score": 116,
+      "hit_files": 12,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          70
+        ],
+        [
+          "jsonl_scan",
+          20
+        ],
+        [
+          "lock_cache",
+          18
+        ],
+        [
+          "queue_retry",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/logging",
+      "files": 20,
+      "score": 105,
+      "hit_files": 20,
+      "top_reasons": [
+        [
+          "lock_cache",
+          57
+        ],
+        [
+          "queue_retry",
+          24
+        ],
+        [
+          "ws_hotpath",
+          18
+        ],
+        [
+          "fs_write",
+          4
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/canvas-host",
+      "files": 6,
+      "score": 90,
+      "hit_files": 5,
+      "top_reasons": [
+        [
+          "fs_write",
+          32
+        ],
+        [
+          "lock_cache",
+          24
+        ],
+        [
+          "fs_read",
+          18
+        ],
+        [
+          "ws_hotpath",
+          16
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/imessage",
+      "files": 21,
+      "score": 83,
+      "hit_files": 21,
+      "top_reasons": [
+        [
+          "lock_cache",
+          72
+        ],
+        [
+          "jsonl_scan",
+          5
+        ],
+        [
+          "queue_retry",
+          4
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/tlon",
+      "files": 30,
+      "score": 81,
+      "hit_files": 27,
+      "top_reasons": [
+        [
+          "lock_cache",
+          63
+        ],
+        [
+          "fs_write",
+          16
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/utils",
+      "files": 22,
+      "score": 81,
+      "hit_files": 22,
+      "top_reasons": [
+        [
+          "lock_cache",
+          33
+        ],
+        [
+          "ws_hotpath",
+          24
+        ],
+        [
+          "queue_retry",
+          24
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/node-host",
+      "files": 6,
+      "score": 81,
+      "hit_files": 6,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          34
+        ],
+        [
+          "lock_cache",
+          21
+        ],
+        [
+          "queue_retry",
+          16
+        ],
+        [
+          "fs_read",
+          6
+        ],
+        [
+          "fs_write",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/pairing",
+      "files": 5,
+      "score": 70,
+      "hit_files": 5,
+      "top_reasons": [
+        [
+          "pairing_state_store",
+          30
+        ],
+        [
+          "fs_write",
+          24
+        ],
+        [
+          "lock_cache",
+          12
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/providers",
+      "files": 9,
+      "score": 60,
+      "hit_files": 9,
+      "top_reasons": [
+        [
+          "lock_cache",
+          60
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/diagnostics-otel",
+      "files": 5,
+      "score": 60,
+      "hit_files": 3,
+      "top_reasons": [
+        [
+          "queue_retry",
+          36
+        ],
+        [
+          "lock_cache",
+          24
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/plugin-sdk",
+      "files": 12,
+      "score": 58,
+      "hit_files": 12,
+      "top_reasons": [
+        [
+          "lock_cache",
+          30
+        ],
+        [
+          "fs_write",
+          12
+        ],
+        [
+          "ws_hotpath",
+          12
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/shared",
+      "files": 18,
+      "score": 52,
+      "hit_files": 18,
+      "top_reasons": [
+        [
+          "lock_cache",
+          48
+        ],
+        [
+          "fs_write",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/google-gemini-cli-auth",
+      "files": 6,
+      "score": 48,
+      "hit_files": 3,
+      "top_reasons": [
+        [
+          "lock_cache",
+          36
+        ],
+        [
+          "fs_read",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/line",
+      "files": 46,
+      "score": 44,
+      "hit_files": 46,
+      "top_reasons": [
+        [
+          "lock_cache",
+          24
+        ],
+        [
+          "fs_write",
+          12
+        ],
+        [
+          "fs_read",
+          4
+        ],
+        [
+          "queue_retry",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/twitch",
+      "files": 35,
+      "score": 44,
+      "hit_files": 31,
+      "top_reasons": [
+        [
+          "lock_cache",
+          18
+        ],
+        [
+          "ws_hotpath",
+          14
+        ],
+        [
+          "fs_write",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/lobster",
+      "files": 7,
+      "score": 44,
+      "hit_files": 3,
+      "top_reasons": [
+        [
+          "queue_retry",
+          24
+        ],
+        [
+          "fs_write",
+          12
+        ],
+        [
+          "ws_hotpath",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/zalo",
+      "files": 21,
+      "score": 43,
+      "hit_files": 17,
+      "top_reasons": [
+        [
+          "lock_cache",
+          21
+        ],
+        [
+          "fs_write",
+          12
+        ],
+        [
+          "fs_read",
+          6
+        ],
+        [
+          "ws_hotpath",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/docker-setup.test.ts",
+      "files": 1,
+      "score": 40,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "fs_write",
+          20
+        ],
+        [
+          "fs_read",
+          10
+        ],
+        [
+          "ws_hotpath",
+          10
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/nextcloud-talk",
+      "files": 19,
+      "score": 36,
+      "hit_files": 17,
+      "top_reasons": [
+        [
+          "lock_cache",
+          18
+        ],
+        [
+          "fs_read",
+          8
+        ],
+        [
+          "fs_write",
+          8
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/googlechat",
+      "files": 19,
+      "score": 35,
+      "hit_files": 17,
+      "top_reasons": [
+        [
+          "lock_cache",
+          21
+        ],
+        [
+          "queue_retry",
+          8
+        ],
+        [
+          "fs_write",
+          4
+        ],
+        [
+          "ws_hotpath",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/macos",
+      "files": 4,
+      "score": 35,
+      "hit_files": 4,
+      "top_reasons": [
+        [
+          "lock_cache",
+          15
+        ],
+        [
+          "ws_hotpath",
+          12
+        ],
+        [
+          "queue_retry",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/signal",
+      "files": 30,
+      "score": 34,
+      "hit_files": 30,
+      "top_reasons": [
+        [
+          "queue_retry",
+          28
+        ],
+        [
+          "lock_cache",
+          6
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/irc",
+      "files": 25,
+      "score": 34,
+      "hit_files": 23,
+      "top_reasons": [
+        [
+          "fs_write",
+          24
+        ],
+        [
+          "fs_read",
+          6
+        ],
+        [
+          "ws_hotpath",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/routing",
+      "files": 5,
+      "score": 27,
+      "hit_files": 5,
+      "top_reasons": [
+        [
+          "lock_cache",
+          27
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/tts",
+      "files": 4,
+      "score": 26,
+      "hit_files": 4,
+      "top_reasons": [
+        [
+          "fs_write",
+          12
+        ],
+        [
+          "lock_cache",
+          6
+        ],
+        [
+          "fs_read",
+          4
+        ],
+        [
+          "queue_retry",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/markdown",
+      "files": 14,
+      "score": 24,
+      "hit_files": 14,
+      "top_reasons": [
+        [
+          "sqlite_local",
+          15
+        ],
+        [
+          "lock_cache",
+          9
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "assets",
+      "files": 12,
+      "score": 24,
+      "hit_files": 2,
+      "top_reasons": [
+        [
+          "lock_cache",
+          12
+        ],
+        [
+          "ws_hotpath",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/zalouser",
+      "files": 19,
+      "score": 23,
+      "hit_files": 15,
+      "top_reasons": [
+        [
+          "lock_cache",
+          9
+        ],
+        [
+          "fs_write",
+          8
+        ],
+        [
+          "ws_hotpath",
+          6
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/phone-control",
+      "files": 2,
+      "score": 22,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          12
+        ],
+        [
+          "fs_write",
+          8
+        ],
+        [
+          "fs_read",
+          2
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/types",
+      "files": 9,
+      "score": 20,
+      "hit_files": 9,
+      "top_reasons": [
+        [
+          "lock_cache",
+          12
+        ],
+        [
+          "queue_retry",
+          8
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/scripts",
+      "files": 1,
+      "score": 20,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "fs_write",
+          16
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/utils.test.ts",
+      "files": 1,
+      "score": 20,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "fs_write",
+          16
+        ],
+        [
+          "fs_read",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/version.test.ts",
+      "files": 1,
+      "score": 20,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "fs_write",
+          20
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "src/logger.test.ts",
+      "files": 1,
+      "score": 18,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "fs_write",
+          8
+        ],
+        [
+          "fs_read",
+          6
+        ],
+        [
+          "ws_hotpath",
+          4
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/line",
+      "files": 9,
+      "score": 16,
+      "hit_files": 7,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          16
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/google-antigravity-auth",
+      "files": 4,
+      "score": 15,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "lock_cache",
+          15
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/device-pair",
+      "files": 2,
+      "score": 12,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "docker-setup.sh",
+      "files": 1,
+      "score": 12,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "openclaw.mjs",
+      "files": 1,
+      "score": 12,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "lock_cache",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "setup-podman.sh",
+      "files": 1,
+      "score": 12,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "vitest.config.ts",
+      "files": 1,
+      "score": 12,
+      "hit_files": 1,
+      "top_reasons": [
+        [
+          "ws_hotpath",
+          12
+        ]
+      ],
+      "priority": "P2"
+    },
+    {
+      "module": "extensions/thread-ownership",
+      "files": 3,
+      "score": 9,
+      "hit_files": 2,
+      "top_reasons": [
+        [
+          "lock_cache",
+          9
+        ]
+      ],
+      "priority": "P2"
+    }
+  ]
+}

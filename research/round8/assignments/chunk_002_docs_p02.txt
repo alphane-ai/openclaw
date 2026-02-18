@@ -1,0 +1,2 @@
+docs/assets/macos-onboarding/01-macos-warning.jpeg
+docs/assets/macos-onboarding/02-local-networks.jpeg

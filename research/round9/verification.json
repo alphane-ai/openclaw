@@ -1,0 +1,22 @@
+{
+  "date": "2026-02-17",
+  "round": "round9",
+  "remaining_todo_input": 658,
+  "subagent_files": 650,
+  "oversize_files": 8,
+  "covered_total": 658,
+  "chunk_count": 9,
+  "duplicate_assignments": [],
+  "cross_duplicate_between_subagent_and_oversize": [],
+  "missing_outputs": [],
+  "unfinished_outputs": [],
+  "over_limit_chunks": [],
+  "oversize_missing_outputs": [],
+  "covered_done": 658,
+  "covered_not_done": [],
+  "covered_missing_rows": [],
+  "status_counts": {
+    "done": 5389
+  },
+  "todo_remaining_count": 0
+}

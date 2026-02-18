@@ -1,0 +1,9 @@
+src/providers/github-copilot-auth.ts
+src/providers/github-copilot-models.ts
+src/providers/github-copilot-token.test.ts
+src/providers/github-copilot-token.ts
+src/providers/google-shared.ensures-function-call-comes-after-user-turn.test.ts
+src/providers/google-shared.preserves-parameters-type-is-missing.test.ts
+src/providers/google-shared.test-helpers.ts
+src/providers/qwen-portal-oauth.test.ts
+src/providers/qwen-portal-oauth.ts

@@ -1,0 +1,1 @@
+docs/images/feishu-step4-permissions.png
