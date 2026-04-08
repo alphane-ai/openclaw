@@ -163,6 +163,9 @@ export function resolveStoredModelOverride(params: {
   if (direct) {
     return { ...direct, source: "session" };
   }
+  if (params.sessionEntry?.spawnedBy?.trim()) {
+    return null;
+  }
   const parentKey = resolveParentSessionKeyCandidate({
     sessionKey: params.sessionKey,
     parentSessionKey: params.parentSessionKey,

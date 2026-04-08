@@ -284,7 +284,9 @@ function resolveChildSessionKeys(
     }
     const spawnedBy = entry.spawnedBy?.trim();
     const parentSessionKey = entry.parentSessionKey?.trim();
-    if (spawnedBy !== controllerSessionKey && parentSessionKey !== controllerSessionKey) {
+    const parentOwnedByController =
+      !spawnedBy && entry.forkedFromParent !== true && parentSessionKey === controllerSessionKey;
+    if (spawnedBy !== controllerSessionKey && !parentOwnedByController) {
       continue;
     }
     const latest = getSessionDisplaySubagentRunByChildSessionKey(key);
@@ -1411,7 +1413,12 @@ export function listSessionsFromStore(params: {
           latest.controllerSessionKey?.trim() || latest.requesterSessionKey?.trim();
         return latestControllerSessionKey === spawnedBy;
       }
-      return entry?.spawnedBy === spawnedBy || entry?.parentSessionKey === spawnedBy;
+      const directSpawnOwner = entry?.spawnedBy === spawnedBy;
+      const dashboardParentOwner =
+        !entry?.spawnedBy &&
+        entry?.forkedFromParent !== true &&
+        entry?.parentSessionKey === spawnedBy;
+      return directSpawnOwner || dashboardParentOwner;
     })
     .filter(([, entry]) => {
       if (!label) {

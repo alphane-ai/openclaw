@@ -152,10 +152,11 @@ export async function materializeSpawnChildSessionContext(params: {
       store[childTarget.canonicalKey] = mergeSessionEntry(store[childTarget.canonicalKey], {
         sessionId: forked.sessionId,
         sessionFile: forked.sessionFile,
-        ...(params.persistParentSessionKey === false
-          ? {}
-          : { parentSessionKey: parentTarget.canonicalKey }),
+        ...(params.persistParentSessionKey === true
+          ? { parentSessionKey: parentTarget.canonicalKey }
+          : {}),
         forkedFromParent: true,
+        forkSourceSessionKey: parentTarget.canonicalKey,
       });
     },
     {
@@ -176,36 +177,4 @@ export async function materializeSpawnChildSessionContext(params: {
     forkedSessionId: forked.sessionId,
     forkedSessionFile: forked.sessionFile,
   };
-}
-
-export async function persistSpawnChildParentSessionLink(params: {
-  cfg: OpenClawConfig;
-  parentSessionKey: string;
-  childSessionKey: string;
-}): Promise<void> {
-  const parentTarget = resolveGatewaySessionStoreTarget({
-    cfg: params.cfg,
-    key: params.parentSessionKey,
-  });
-  const childTarget = resolveGatewaySessionStoreTarget({
-    cfg: params.cfg,
-    key: params.childSessionKey,
-  });
-  await updateSessionStore(
-    childTarget.storePath,
-    (store) => {
-      pruneLegacyStoreKeys({
-        store,
-        canonicalKey: childTarget.canonicalKey,
-        candidates: childTarget.storeKeys,
-      });
-      store[childTarget.canonicalKey] = mergeSessionEntry(store[childTarget.canonicalKey], {
-        parentSessionKey: parentTarget.canonicalKey,
-        forkedFromParent: true,
-      });
-    },
-    {
-      activeSessionKey: childTarget.canonicalKey,
-    },
-  );
 }

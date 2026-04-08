@@ -2336,6 +2336,34 @@ describe("listSessionsFromStore subagent metadata", () => {
     expect(result.sessions.map((session) => session.key)).toEqual(["agent:main:dashboard:child"]);
   });
 
+  test("does not treat forked spawn children as parent-owned when only parentSessionKey matches", () => {
+    resetSubagentRegistryForTests({ persist: false });
+    const now = Date.now();
+    const store: Record<string, SessionEntry> = {
+      "agent:main:main": {
+        sessionId: "sess-main",
+        updatedAt: now,
+      } as SessionEntry,
+      "agent:main:subagent:child": {
+        sessionId: "sess-child",
+        updatedAt: now - 1_000,
+        parentSessionKey: "agent:main:main",
+        forkedFromParent: true,
+      } as SessionEntry,
+    };
+
+    const result = listSessionsFromStore({
+      cfg,
+      storePath: "/tmp/sessions.json",
+      store,
+      opts: {
+        spawnedBy: "agent:main:main",
+      },
+    });
+
+    expect(result.sessions).toEqual([]);
+  });
+
   test("falls back to persisted subagent timing after run archival", () => {
     const now = Date.now();
     const store: Record<string, SessionEntry> = {

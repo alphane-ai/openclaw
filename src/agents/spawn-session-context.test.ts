@@ -68,9 +68,10 @@ describe("materializeSpawnChildSessionContext", () => {
     const childEntry = store[childSessionKey];
 
     expect(childEntry).toMatchObject({
-      parentSessionKey,
       forkedFromParent: true,
+      forkSourceSessionKey: parentSessionKey,
     });
+    expect(childEntry?.parentSessionKey).toBeUndefined();
     expect(childEntry?.sessionId).toBeTruthy();
     expect(childEntry?.sessionId).not.toBe(parentEntry?.sessionId);
     expect(childEntry?.sessionFile).toBeTruthy();
@@ -154,6 +155,7 @@ describe("materializeSpawnChildSessionContext", () => {
     const store = loadSessionStore(storePath, { skipCache: true });
     expect(store[childSessionKey]).toMatchObject({
       forkedFromParent: true,
+      forkSourceSessionKey: parentSessionKey,
     });
     expect(store[childSessionKey]?.parentSessionKey).toBeUndefined();
   });

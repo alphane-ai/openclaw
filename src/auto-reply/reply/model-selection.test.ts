@@ -251,6 +251,29 @@ describe("createModelSelectionState parent inheritance", () => {
     expect(state.model).toBe("gpt-4o");
   });
 
+  it("does not inherit parent override for spawned child sessions", async () => {
+    const cfg = {} as OpenClawConfig;
+    const parentKey = "agent:main:discord:channel:c1";
+    const sessionKey = "agent:main:subagent:child";
+    const parentEntry = makeEntry({
+      providerOverride: "openai",
+      modelOverride: "gpt-4o",
+    });
+    const state = await resolveStateWithParent({
+      cfg,
+      parentKey,
+      sessionKey,
+      parentEntry,
+      parentSessionKey: parentKey,
+      sessionEntry: makeEntry({
+        spawnedBy: "agent:main:main",
+      }),
+    });
+
+    expect(state.provider).toBe("openai");
+    expect(state.model).toBe("gpt-4o-mini");
+  });
+
   it("derives parent key from topic session suffix", async () => {
     const cfg = {} as OpenClawConfig;
     const parentKey = "agent:main:telegram:group:123";

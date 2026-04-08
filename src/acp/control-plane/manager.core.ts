@@ -1878,7 +1878,10 @@ export class AcpSessionManager {
       sessionKey: params.sessionKey,
     })?.entry;
     const requesterSessionKey =
-      normalizeText(childEntry?.spawnedBy) ?? normalizeText(childEntry?.parentSessionKey);
+      normalizeText(childEntry?.spawnedBy) ??
+      (childEntry?.forkedFromParent === true
+        ? undefined
+        : normalizeText(childEntry?.parentSessionKey));
     if (!requesterSessionKey) {
       return null;
     }

@@ -28,7 +28,6 @@ import {
   assertSpawnChildSessionContextModeAllowed,
   type SpawnSessionContextMode,
   materializeSpawnChildSessionContext,
-  persistSpawnChildParentSessionLink,
 } from "./spawn-session-context.js";
 import {
   mapToolContextToSpawnedRunMetadata,
@@ -596,7 +595,6 @@ export async function spawnSubagentDirect(
       contextMode: params.contextMode,
       parentSessionKey: requesterInternalKey,
       childSessionKey,
-      persistParentSessionKey: false,
     });
   } catch (err) {
     await cleanupFailedSpawnBeforeAgentStart({
@@ -759,28 +757,6 @@ export async function spawnSubagentDirect(
       childSessionKey,
     };
   }
-  if (params.contextMode === "fork_parent") {
-    try {
-      await persistSpawnChildParentSessionLink({
-        cfg,
-        parentSessionKey: requesterInternalKey,
-        childSessionKey,
-      });
-    } catch (err) {
-      await cleanupFailedSpawnBeforeAgentStart({
-        childSessionKey,
-        attachmentAbsDir,
-        emitLifecycleHooks: threadBindingReady,
-        deleteTranscript: true,
-      });
-      return {
-        status: "error",
-        error: summarizeError(err),
-        childSessionKey,
-      };
-    }
-  }
-
   const childIdem = crypto.randomUUID();
   let childRunId: string = childIdem;
   try {

@@ -766,7 +766,7 @@ export function buildStatusMessage(args: StatusArgs): string {
       groupChatType: entry.chatType ?? entry.origin?.chatType,
       groupChannel: entry.groupChannel,
       groupSubject: entry.subject,
-      parentSessionKey: args.parentSessionKey,
+      parentSessionKey: entry.spawnedBy?.trim() ? undefined : args.parentSessionKey,
     });
     if (!channelOverride) {
       return undefined;

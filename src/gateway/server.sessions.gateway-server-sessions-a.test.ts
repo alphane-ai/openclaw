@@ -1360,6 +1360,7 @@ describe("gateway server sessions", () => {
         spawnedWorkspaceDir?: string;
         parentSessionKey?: string;
         forkedFromParent?: boolean;
+        forkSourceSessionKey?: string;
         spawnDepth?: number;
         subagentRole?: string;
         subagentControlScope?: string;
@@ -1413,8 +1414,9 @@ describe("gateway server sessions", () => {
     expect(reset.payload?.entry.space).toBe("hq");
     expect(reset.payload?.entry.spawnedBy).toBe("agent:main:main");
     expect(reset.payload?.entry.spawnedWorkspaceDir).toBe("/tmp/child-workspace");
-    expect(reset.payload?.entry.parentSessionKey).toBe("agent:main:main");
+    expect(reset.payload?.entry.parentSessionKey).toBeUndefined();
     expect(reset.payload?.entry.forkedFromParent).toBe(true);
+    expect(reset.payload?.entry.forkSourceSessionKey).toBe("agent:main:main");
     expect(reset.payload?.entry.spawnDepth).toBe(2);
     expect(reset.payload?.entry.subagentRole).toBe("orchestrator");
     expect(reset.payload?.entry.subagentControlScope).toBe("children");
@@ -1470,6 +1472,7 @@ describe("gateway server sessions", () => {
         spawnedWorkspaceDir?: string;
         parentSessionKey?: string;
         forkedFromParent?: boolean;
+        forkSourceSessionKey?: string;
         spawnDepth?: number;
         subagentRole?: string;
         subagentControlScope?: string;
@@ -1521,8 +1524,9 @@ describe("gateway server sessions", () => {
     expect(store["agent:main:subagent:child"]?.space).toBe("hq");
     expect(store["agent:main:subagent:child"]?.spawnedBy).toBe("agent:main:main");
     expect(store["agent:main:subagent:child"]?.spawnedWorkspaceDir).toBe("/tmp/child-workspace");
-    expect(store["agent:main:subagent:child"]?.parentSessionKey).toBe("agent:main:main");
+    expect(store["agent:main:subagent:child"]?.parentSessionKey).toBeUndefined();
     expect(store["agent:main:subagent:child"]?.forkedFromParent).toBe(true);
+    expect(store["agent:main:subagent:child"]?.forkSourceSessionKey).toBe("agent:main:main");
     expect(store["agent:main:subagent:child"]?.spawnDepth).toBe(2);
     expect(store["agent:main:subagent:child"]?.subagentRole).toBe("orchestrator");
     expect(store["agent:main:subagent:child"]?.subagentControlScope).toBe("children");

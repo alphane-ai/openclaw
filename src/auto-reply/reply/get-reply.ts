@@ -284,7 +284,7 @@ export async function getReplyFromConfig(
     groupChatType: sessionEntry.chatType ?? sessionCtx.ChatType ?? finalized.ChatType,
     groupChannel: sessionEntry.groupChannel ?? sessionCtx.GroupChannel ?? finalized.GroupChannel,
     groupSubject: sessionEntry.subject ?? sessionCtx.GroupSubject ?? finalized.GroupSubject,
-    parentSessionKey: sessionCtx.ParentSessionKey,
+    parentSessionKey: sessionEntry.spawnedBy?.trim() ? undefined : sessionCtx.ParentSessionKey,
   });
   const hasSessionModelOverride = Boolean(
     sessionEntry.modelOverride?.trim() || sessionEntry.providerOverride?.trim(),

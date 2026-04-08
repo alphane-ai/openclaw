@@ -91,6 +91,8 @@ export type SessionEntry = {
   parentSessionKey?: string;
   /** True after a thread/topic session has been forked from its parent transcript once. */
   forkedFromParent?: boolean;
+  /** Provenance only: source session key used when a child transcript was forked. */
+  forkSourceSessionKey?: string;
   /** Subagent spawn depth (0 = main, 1 = sub-agent, 2 = sub-sub-agent). */
   spawnDepth?: number;
   /** Explicit role assigned at spawn time for subagent tool policy/control decisions. */

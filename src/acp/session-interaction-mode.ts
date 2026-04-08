@@ -2,7 +2,10 @@ import type { SessionEntry } from "../config/sessions/types.js";
 
 export type AcpSessionInteractionMode = "interactive" | "parent-owned-background";
 
-type SessionInteractionEntry = Pick<SessionEntry, "spawnedBy" | "parentSessionKey" | "acp">;
+type SessionInteractionEntry = Pick<
+  SessionEntry,
+  "spawnedBy" | "parentSessionKey" | "forkedFromParent" | "acp"
+>;
 
 function normalizeText(value: string | undefined): string | undefined {
   const trimmed = value?.trim();
@@ -18,7 +21,10 @@ export function resolveAcpSessionInteractionMode(
   if (entry?.acp?.mode !== "oneshot") {
     return "interactive";
   }
-  if (normalizeText(entry.spawnedBy) || normalizeText(entry.parentSessionKey)) {
+  if (normalizeText(entry.spawnedBy)) {
+    return "parent-owned-background";
+  }
+  if (entry?.forkedFromParent !== true && normalizeText(entry.parentSessionKey)) {
     return "parent-owned-background";
   }
   return "interactive";

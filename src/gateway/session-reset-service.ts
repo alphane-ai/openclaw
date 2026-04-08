@@ -405,8 +405,16 @@ export async function performGatewaySessionReset(params: {
       queueDrop: currentEntry?.queueDrop,
       spawnedBy: currentEntry?.spawnedBy,
       spawnedWorkspaceDir: currentEntry?.spawnedWorkspaceDir,
-      parentSessionKey: currentEntry?.parentSessionKey,
+      parentSessionKey:
+        currentEntry?.spawnedBy && currentEntry?.forkedFromParent
+          ? undefined
+          : currentEntry?.parentSessionKey,
       forkedFromParent: currentEntry?.forkedFromParent,
+      forkSourceSessionKey:
+        currentEntry?.forkSourceSessionKey ??
+        (currentEntry?.spawnedBy && currentEntry?.forkedFromParent
+          ? currentEntry?.parentSessionKey
+          : undefined),
       spawnDepth: currentEntry?.spawnDepth,
       subagentRole: currentEntry?.subagentRole,
       subagentControlScope: currentEntry?.subagentControlScope,
