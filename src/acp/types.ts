@@ -25,6 +25,7 @@ export type AcpSession = {
   lastTouchedAt: number;
   abortController: AbortController | null;
   activeRunId: string | null;
+  replayedTranscriptSessionKey?: string;
 };
 
 export type AcpServerOptions = {

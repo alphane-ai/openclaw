@@ -791,6 +791,12 @@ export async function spawnAcpDirect(
   }
   const streamToParentRequested = params.streamTo === "parent";
   const parentSessionKey = ctx.agentSessionKey?.trim();
+  if (params.contextMode === "fork_parent" && !parentSessionKey) {
+    return {
+      status: "error",
+      error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+    };
+  }
   if (streamToParentRequested && !parentSessionKey) {
     return {
       status: "error",

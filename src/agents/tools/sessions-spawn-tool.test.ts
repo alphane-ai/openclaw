@@ -290,6 +290,22 @@ describe("sessions_spawn tool", () => {
     expect(hoisted.spawnAcpDirectMock).not.toHaveBeenCalled();
   });
 
+  it("rejects fork_parent without an active requester session", async () => {
+    const tool = createSessionsSpawnTool();
+
+    const result = await tool.execute("call-fork-no-requester", {
+      task: "resume prior work",
+      contextMode: "fork_parent",
+    });
+
+    expect(result.details).toMatchObject({
+      status: "error",
+      error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+    });
+    expect(hoisted.spawnSubagentDirectMock).not.toHaveBeenCalled();
+    expect(hoisted.spawnAcpDirectMock).not.toHaveBeenCalled();
+  });
+
   it("rejects attachments for ACP runtime", async () => {
     const tool = createSessionsSpawnTool({
       agentSessionKey: "agent:main:main",

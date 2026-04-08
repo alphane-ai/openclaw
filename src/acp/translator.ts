@@ -109,6 +109,7 @@ type GatewaySessionPresentationRow = Pick<
   | "totalTokens"
   | "totalTokensFresh"
   | "contextTokens"
+  | "forkedFromParent"
 >;
 
 type SessionPresentation = {
@@ -298,7 +299,10 @@ function buildSessionPresentation(params: {
   return { configOptions, modes };
 }
 
-function extractReplayChunks(message: GatewayTranscriptMessage): ReplayChunk[] {
+function extractReplayChunks(
+  message: GatewayTranscriptMessage,
+  options?: { includeThinking?: boolean },
+): ReplayChunk[] {
   const role = typeof message.role === "string" ? message.role : "";
   if (role !== "user" && role !== "assistant") {
     return [];
@@ -331,6 +335,7 @@ function extractReplayChunks(message: GatewayTranscriptMessage): ReplayChunk[] {
       continue;
     }
     if (
+      options?.includeThinking !== false &&
       role === "assistant" &&
       typedBlock.type === "thinking" &&
       typeof typedBlock.thinking === "string" &&
@@ -561,14 +566,33 @@ export class AcpGatewayAgent implements Agent {
       cwd: params.cwd,
     });
     this.log(`loadSession: ${session.sessionId} -> ${session.sessionKey}`);
-    const [sessionSnapshot, transcript] = await Promise.all([
-      this.getSessionSnapshot(session.sessionKey),
+    const [sessionRow, transcript] = await Promise.all([
+      this.getGatewaySessionRow(session.sessionKey).catch((err) => {
+        this.log(`session presentation fallback for ${session.sessionKey}: ${String(err)}`);
+        return undefined;
+      }),
       this.getSessionTranscript(session.sessionKey).catch((err) => {
         this.log(`session transcript fallback for ${session.sessionKey}: ${String(err)}`);
         return [];
       }),
     ]);
-    await this.replaySessionTranscript(session.sessionId, transcript);
+    const sessionSnapshot: SessionSnapshot = sessionRow
+      ? {
+          ...buildSessionPresentation({ row: sessionRow }),
+          metadata: buildSessionMetadata({ row: sessionRow, sessionKey: session.sessionKey }),
+          usage: buildSessionUsageSnapshot(sessionRow),
+        }
+      : {
+          ...buildSessionPresentation({}),
+          metadata: buildSessionMetadata({ sessionKey: session.sessionKey }),
+        };
+    const shouldReplayTranscript = session.replayedTranscriptSessionKey !== session.sessionKey;
+    if (shouldReplayTranscript) {
+      await this.replaySessionTranscript(session.sessionId, transcript, {
+        includeThinking: sessionRow?.forkedFromParent !== true,
+      });
+      session.replayedTranscriptSessionKey = session.sessionKey;
+    }
     await this.sendSessionSnapshotUpdate(session.sessionId, sessionSnapshot, {
       includeControls: false,
     });
@@ -1246,6 +1270,7 @@ export class AcpGatewayAgent implements Agent {
       label: session.label,
       derivedTitle: session.derivedTitle,
       updatedAt: session.updatedAt,
+      forkedFromParent: session.forkedFromParent,
       thinkingLevel: session.thinkingLevel,
       modelProvider: session.modelProvider,
       model: session.model,
@@ -1322,9 +1347,10 @@ export class AcpGatewayAgent implements Agent {
   private async replaySessionTranscript(
     sessionId: string,
     transcript: ReadonlyArray<GatewayTranscriptMessage>,
+    options?: { includeThinking?: boolean },
   ): Promise<void> {
     for (const message of transcript) {
-      const replayChunks = extractReplayChunks(message);
+      const replayChunks = extractReplayChunks(message, options);
       for (const chunk of replayChunks) {
         await this.connection.sessionUpdate({
           sessionId,

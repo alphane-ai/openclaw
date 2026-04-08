@@ -382,6 +382,149 @@ describe("acp session UX bridge behavior", () => {
     sessionStore.clearAllSessionsForTest();
   });
 
+  it("suppresses hidden assistant thinking replay for fork_parent sessions on loadSession", async () => {
+    const sessionStore = createInMemorySessionStore();
+    const connection = createAcpConnection();
+    const sessionUpdate = connection.__sessionUpdateMock;
+    const request = vi.fn(async (method: string) => {
+      if (method === "sessions.list") {
+        return {
+          ts: Date.now(),
+          path: "/tmp/sessions.json",
+          count: 1,
+          defaults: {
+            modelProvider: null,
+            model: null,
+            contextTokens: null,
+          },
+          sessions: [
+            {
+              key: "agent:main:subagent:forked-child",
+              label: "forked-child",
+              displayName: "Forked child",
+              derivedTitle: "Continue work",
+              kind: "direct",
+              updatedAt: 1_710_000_000_000,
+              thinkingLevel: "high",
+              modelProvider: "openai",
+              model: "gpt-5.4",
+              verboseLevel: "full",
+              reasoningLevel: "stream",
+              responseUsage: "tokens",
+              elevatedLevel: "ask",
+              totalTokens: 4096,
+              totalTokensFresh: true,
+              contextTokens: 8192,
+              forkedFromParent: true,
+            },
+          ],
+        };
+      }
+      if (method === "sessions.get") {
+        return {
+          messages: [
+            { role: "user", content: [{ type: "text", text: "Question" }] },
+            {
+              role: "assistant",
+              content: [
+                { type: "thinking", thinking: "Internal loop about NO_REPLY" },
+                { type: "text", text: "Answer" },
+              ],
+            },
+          ],
+        };
+      }
+      return { ok: true };
+    }) as GatewayClient["request"];
+    const agent = new AcpGatewayAgent(connection, createAcpGateway(request), {
+      sessionStore,
+    });
+
+    await agent.loadSession(createLoadSessionRequest("agent:main:subagent:forked-child"));
+
+    expect(sessionUpdate).toHaveBeenCalledWith({
+      sessionId: "agent:main:subagent:forked-child",
+      update: {
+        sessionUpdate: "user_message_chunk",
+        content: { type: "text", text: "Question" },
+      },
+    });
+    expect(sessionUpdate).toHaveBeenCalledWith({
+      sessionId: "agent:main:subagent:forked-child",
+      update: {
+        sessionUpdate: "agent_message_chunk",
+        content: { type: "text", text: "Answer" },
+      },
+    });
+    const replayedThoughtChunks = sessionUpdate.mock.calls.filter(
+      (call: unknown[]) =>
+        (call[0] as { update?: { sessionUpdate?: string } } | undefined)?.update?.sessionUpdate ===
+        "agent_thought_chunk",
+    );
+    expect(replayedThoughtChunks).toHaveLength(0);
+
+    sessionStore.clearAllSessionsForTest();
+  });
+
+  it("does not replay the full transcript again when loadSession refreshes an existing session id", async () => {
+    const sessionStore = createInMemorySessionStore();
+    const connection = createAcpConnection();
+    const sessionUpdate = connection.__sessionUpdateMock;
+    const request = vi.fn(async (method: string) => {
+      if (method === "sessions.list") {
+        return {
+          ts: Date.now(),
+          path: "/tmp/sessions.json",
+          count: 1,
+          defaults: {
+            modelProvider: null,
+            model: null,
+            contextTokens: null,
+          },
+          sessions: [
+            {
+              key: "shared-session",
+              label: "shared-session",
+              displayName: "Shared session",
+              derivedTitle: "Shared work",
+              kind: "direct",
+              updatedAt: 1_710_000_000_000,
+              thinkingLevel: "high",
+              modelProvider: "openai",
+              model: "gpt-5.4",
+              totalTokens: 4096,
+              totalTokensFresh: true,
+              contextTokens: 8192,
+            },
+          ],
+        };
+      }
+      if (method === "sessions.get") {
+        return {
+          messages: [{ role: "user", content: [{ type: "text", text: "Question" }] }],
+        };
+      }
+      return { ok: true };
+    }) as GatewayClient["request"];
+    const agent = new AcpGatewayAgent(connection, createAcpGateway(request), {
+      sessionStore,
+    });
+
+    await agent.loadSession(createLoadSessionRequest("shared-session"));
+    const callsAfterFirstLoad = sessionUpdate.mock.calls.length;
+    await agent.loadSession(createLoadSessionRequest("shared-session"));
+
+    expect(sessionUpdate.mock.calls.length).toBeGreaterThan(callsAfterFirstLoad);
+    const replayedUserChunks = sessionUpdate.mock.calls.filter(
+      (call: unknown[]) =>
+        (call[0] as { update?: { sessionUpdate?: string } } | undefined)?.update?.sessionUpdate ===
+        "user_message_chunk",
+    );
+    expect(replayedUserChunks).toHaveLength(1);
+
+    sessionStore.clearAllSessionsForTest();
+  });
+
   it("falls back to an empty transcript when sessions.get fails during loadSession", async () => {
     const sessionStore = createInMemorySessionStore();
     const connection = createAcpConnection();

@@ -225,4 +225,34 @@ describe("spawnSubagentDirect seam flow", () => {
     expect(result.error).toContain("forkParent.enabled");
     expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
   });
+
+  it("rejects fork_parent without an active requester session", async () => {
+    hoisted.configOverride = createConfigOverride({
+      tools: {
+        sessions_spawn: {
+          forkParent: {
+            enabled: true,
+          },
+        },
+      },
+    });
+
+    const result = await spawnSubagentDirect(
+      {
+        task: "continue with parent context",
+        contextMode: "fork_parent",
+      },
+      {
+        agentChannel: "discord",
+        agentAccountId: "acct-1",
+        agentTo: "user-1",
+      },
+    );
+
+    expect(result).toMatchObject({
+      status: "error",
+      error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+    });
+    expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
+  });
 });

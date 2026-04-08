@@ -221,6 +221,13 @@ export function createSessionsSpawnTool(
         });
       }
 
+      if (contextMode === "fork_parent" && !opts?.agentSessionKey?.trim()) {
+        return jsonResult({
+          status: "error",
+          error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+        });
+      }
+
       if (runtime === "acp") {
         if (Array.isArray(attachments) && attachments.length > 0) {
           return jsonResult({

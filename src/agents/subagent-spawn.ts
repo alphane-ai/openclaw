@@ -28,6 +28,7 @@ import {
   assertSpawnChildSessionContextModeAllowed,
   type SpawnSessionContextMode,
   materializeSpawnChildSessionContext,
+  persistSpawnChildParentSessionLink,
 } from "./spawn-session-context.js";
 import {
   mapToolContextToSpawnedRunMetadata,
@@ -418,6 +419,12 @@ export async function spawnSubagentDirect(
   let threadBindingReady = false;
   const { mainKey, alias } = resolveMainSessionAlias(cfg);
   const requesterSessionKey = ctx.agentSessionKey;
+  if (params.contextMode === "fork_parent" && !requesterSessionKey?.trim()) {
+    return {
+      status: "error",
+      error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+    };
+  }
   const requesterInternalKey = requesterSessionKey
     ? resolveInternalSessionKey({
         key: requesterSessionKey,
@@ -589,6 +596,7 @@ export async function spawnSubagentDirect(
       contextMode: params.contextMode,
       parentSessionKey: requesterInternalKey,
       childSessionKey,
+      persistParentSessionKey: false,
     });
   } catch (err) {
     await cleanupFailedSpawnBeforeAgentStart({
@@ -750,6 +758,27 @@ export async function spawnSubagentDirect(
       error: spawnLineagePatchError,
       childSessionKey,
     };
+  }
+  if (params.contextMode === "fork_parent") {
+    try {
+      await persistSpawnChildParentSessionLink({
+        cfg,
+        parentSessionKey: requesterInternalKey,
+        childSessionKey,
+      });
+    } catch (err) {
+      await cleanupFailedSpawnBeforeAgentStart({
+        childSessionKey,
+        attachmentAbsDir,
+        emitLifecycleHooks: threadBindingReady,
+        deleteTranscript: true,
+      });
+      return {
+        status: "error",
+        error: summarizeError(err),
+        childSessionKey,
+      };
+    }
   }
 
   const childIdem = crypto.randomUUID();

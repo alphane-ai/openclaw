@@ -514,6 +514,34 @@ describe("spawnAcpDirect", () => {
     expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
   });
 
+  it("rejects fork_parent without an active requester session", async () => {
+    replaceSpawnConfig({
+      ...hoisted.state.cfg,
+      tools: {
+        sessions_spawn: {
+          forkParent: {
+            enabled: true,
+          },
+        },
+      },
+    });
+
+    const result = await spawnAcpDirect(
+      createSpawnRequest({
+        contextMode: "fork_parent",
+      }),
+      createRequesterContext({
+        agentSessionKey: undefined,
+      }),
+    );
+
+    expect(result).toMatchObject({
+      status: "error",
+      error: 'sessions_spawn contextMode="fork_parent" requires an active requester session.',
+    });
+    expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
+  });
+
   it("spawns Matrix thread-bound ACP sessions from top-level room targets", async () => {
     enableMatrixAcpThreadBindings();
     hoisted.sessionBindingBindMock.mockImplementationOnce(

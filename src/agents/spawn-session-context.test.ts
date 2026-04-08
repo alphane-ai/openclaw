@@ -114,6 +114,50 @@ describe("materializeSpawnChildSessionContext", () => {
     ).rejects.toThrow(/parent context is too large/i);
   });
 
+  it("can defer parentSessionKey persistence until ownership is written", async () => {
+    const dir = createTestDir();
+    createdDirs.push(dir);
+    const storePath = path.join(dir, "sessions.json");
+    const cfg: OpenClawConfig = {
+      session: {
+        mainKey: "main",
+        scope: "per-sender",
+        store: storePath,
+      },
+    };
+    const parentSessionKey = "agent:main:main";
+    const childSessionKey = "agent:main:subagent:child-3";
+
+    await updateSessionStore(storePath, (store) => {
+      store[parentSessionKey] = {
+        sessionId: "parent-session-id",
+        updatedAt: Date.now(),
+        totalTokens: 42,
+      };
+    });
+    const appended = await appendAssistantMessageToSessionTranscript({
+      agentId: "main",
+      sessionKey: parentSessionKey,
+      text: "parent transcript seed",
+      storePath,
+    });
+    expect(appended.ok).toBe(true);
+
+    await materializeSpawnChildSessionContext({
+      cfg,
+      contextMode: "fork_parent",
+      parentSessionKey,
+      childSessionKey,
+      persistParentSessionKey: false,
+    });
+
+    const store = loadSessionStore(storePath, { skipCache: true });
+    expect(store[childSessionKey]).toMatchObject({
+      forkedFromParent: true,
+    });
+    expect(store[childSessionKey]?.parentSessionKey).toBeUndefined();
+  });
+
   it("rejects fork_parent when the feature flag is disabled", () => {
     const cfg: OpenClawConfig = {
       tools: {
