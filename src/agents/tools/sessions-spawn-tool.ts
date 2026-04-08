@@ -5,6 +5,7 @@ import { normalizeDeliveryContext } from "../../utils/delivery-context.js";
 import type { GatewayMessageChannel } from "../../utils/message-channel.js";
 import { spawnAcpDirect } from "../acp-spawn.js";
 import { optionalStringEnum } from "../schema/typebox.js";
+import { SPAWN_SESSION_CONTEXT_MODES } from "../spawn-session-context.js";
 import type { SpawnedToolContext } from "../spawned-context.js";
 import { registerSubagentRun } from "../subagent-registry.js";
 import { SUBAGENT_SPAWN_MODES, spawnSubagentDirect } from "../subagent-spawn.js";
@@ -76,6 +77,8 @@ const SessionsSpawnToolSchema = Type.Object({
   label: Type.Optional(Type.String()),
   runtime: optionalStringEnum(SESSIONS_SPAWN_RUNTIMES),
   agentId: Type.Optional(Type.String()),
+  contextMode: Type.Optional(optionalStringEnum(SPAWN_SESSION_CONTEXT_MODES)),
+  inheritParentTranscript: Type.Optional(Type.Boolean()),
   resumeSessionId: Type.Optional(
     Type.String({
       description:
@@ -132,7 +135,7 @@ export function createSessionsSpawnTool(
     label: "Sessions",
     name: "sessions_spawn",
     description:
-      'Spawn an isolated session (runtime="subagent" or runtime="acp"). mode="run" is one-shot and mode="session" is persistent/thread-bound. Subagents inherit the parent workspace directory automatically.',
+      'Spawn an isolated session (runtime="subagent" or runtime="acp"). mode="run" is one-shot and mode="session" is persistent/thread-bound. Set contextMode="fork_parent" to fork the current session transcript into the child before it starts. Subagents inherit the parent workspace directory automatically.',
     parameters: SessionsSpawnToolSchema,
     execute: async (_toolCallId, args) => {
       const params = args as Record<string, unknown>;
@@ -148,6 +151,14 @@ export function createSessionsSpawnTool(
       const label = typeof params.label === "string" ? params.label.trim() : "";
       const runtime = params.runtime === "acp" ? "acp" : "subagent";
       const requestedAgentId = readStringParam(params, "agentId");
+      const inheritParentTranscript = params.inheritParentTranscript === true;
+      const inheritParentTranscriptExplicitFalse = params.inheritParentTranscript === false;
+      const contextMode =
+        params.contextMode === "fork_parent"
+          ? "fork_parent"
+          : inheritParentTranscript
+            ? "fork_parent"
+            : "fresh";
       const resumeSessionId = readStringParam(params, "resumeSessionId");
       const modelOverride = readStringParam(params, "model");
       const thinkingOverrideRaw = readStringParam(params, "thinking");
@@ -185,10 +196,28 @@ export function createSessionsSpawnTool(
         });
       }
 
+      if (
+        (params.contextMode === "fresh" && inheritParentTranscript) ||
+        (params.contextMode === "fork_parent" && inheritParentTranscriptExplicitFalse)
+      ) {
+        return jsonResult({
+          status: "error",
+          error:
+            'contextMode and inheritParentTranscript conflict. Use either contextMode="fork_parent" or inheritParentTranscript=true, but not conflicting values.',
+        });
+      }
+
       if (resumeSessionId && runtime !== "acp") {
         return jsonResult({
           status: "error",
           error: `resumeSessionId is only supported for runtime=acp; got runtime=${runtime}`,
+        });
+      }
+
+      if (resumeSessionId && contextMode === "fork_parent") {
+        return jsonResult({
+          status: "error",
+          error: 'resumeSessionId is incompatible with contextMode="fork_parent".',
         });
       }
 
@@ -205,6 +234,7 @@ export function createSessionsSpawnTool(
             task,
             label: label || undefined,
             agentId: requestedAgentId,
+            contextMode,
             resumeSessionId,
             cwd,
             mode: mode === "run" || mode === "session" ? mode : undefined,
@@ -289,6 +319,7 @@ export function createSessionsSpawnTool(
           task,
           label: label || undefined,
           agentId: requestedAgentId,
+          contextMode,
           model: modelOverride,
           thinking: thinkingOverrideRaw,
           runTimeoutSeconds,

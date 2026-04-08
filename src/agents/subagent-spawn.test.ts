@@ -203,4 +203,26 @@ describe("spawnSubagentDirect seam flow", () => {
       }
     }
   });
+
+  it("rejects fork_parent when the feature flag is disabled", async () => {
+    const result = await spawnSubagentDirect(
+      {
+        task: "continue with parent context",
+        contextMode: "fork_parent",
+      },
+      {
+        agentSessionKey: "agent:main:main",
+        agentChannel: "discord",
+        agentAccountId: "acct-1",
+        agentTo: "user-1",
+      },
+    );
+
+    expect(result).toMatchObject({
+      status: "error",
+      childSessionKey: expect.stringMatching(/^agent:main:subagent:/),
+    });
+    expect(result.error).toContain("forkParent.enabled");
+    expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
+  });
 });

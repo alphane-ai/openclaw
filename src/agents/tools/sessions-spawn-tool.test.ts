@@ -200,6 +200,45 @@ describe("sessions_spawn tool", () => {
     );
   });
 
+  it("forwards fork_parent context to subagent spawns", async () => {
+    const tool = createSessionsSpawnTool({
+      agentSessionKey: "agent:main:main",
+    });
+
+    await tool.execute("call-fork-subagent", {
+      task: "continue with full context",
+      contextMode: "fork_parent",
+    });
+
+    expect(hoisted.spawnSubagentDirectMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        task: "continue with full context",
+        contextMode: "fork_parent",
+      }),
+      expect.any(Object),
+    );
+  });
+
+  it("maps inheritParentTranscript to fork_parent for ACP spawns", async () => {
+    const tool = createSessionsSpawnTool({
+      agentSessionKey: "agent:main:main",
+    });
+
+    await tool.execute("call-fork-acp", {
+      runtime: "acp",
+      task: "continue with full context",
+      inheritParentTranscript: true,
+    });
+
+    expect(hoisted.spawnAcpDirectMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        task: "continue with full context",
+        contextMode: "fork_parent",
+      }),
+      expect.any(Object),
+    );
+  });
+
   it("rejects resumeSessionId without runtime=acp", async () => {
     const tool = createSessionsSpawnTool({
       agentSessionKey: "agent:main:main",
@@ -211,6 +250,42 @@ describe("sessions_spawn tool", () => {
     });
 
     expect(JSON.stringify(result)).toContain("resumeSessionId is only supported for runtime=acp");
+    expect(hoisted.spawnSubagentDirectMock).not.toHaveBeenCalled();
+    expect(hoisted.spawnAcpDirectMock).not.toHaveBeenCalled();
+  });
+
+  it("rejects conflicting contextMode and inheritParentTranscript values", async () => {
+    const tool = createSessionsSpawnTool({
+      agentSessionKey: "agent:main:main",
+    });
+
+    const result = await tool.execute("call-conflict", {
+      task: "resume prior work",
+      contextMode: "fresh",
+      inheritParentTranscript: true,
+    });
+
+    expect(JSON.stringify(result)).toContain("contextMode and inheritParentTranscript conflict");
+    expect(hoisted.spawnSubagentDirectMock).not.toHaveBeenCalled();
+    expect(hoisted.spawnAcpDirectMock).not.toHaveBeenCalled();
+  });
+
+  it("rejects resumeSessionId together with fork_parent", async () => {
+    const tool = createSessionsSpawnTool({
+      agentSessionKey: "agent:main:main",
+    });
+
+    const result = await tool.execute("call-fork-resume-conflict", {
+      runtime: "acp",
+      task: "resume prior work",
+      contextMode: "fork_parent",
+      resumeSessionId: "7f4a78e0-f6be-43fe-855c-c1c4fd229bc4",
+    });
+
+    expect(result.details).toMatchObject({
+      status: "error",
+      error: 'resumeSessionId is incompatible with contextMode="fork_parent".',
+    });
     expect(hoisted.spawnSubagentDirectMock).not.toHaveBeenCalled();
     expect(hoisted.spawnAcpDirectMock).not.toHaveBeenCalled();
   });

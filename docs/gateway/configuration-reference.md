@@ -2090,6 +2090,9 @@ Controls inline attachment support for `sessions_spawn`.
 {
   tools: {
     sessions_spawn: {
+      forkParent: {
+        enabled: false, // kill switch for contextMode="fork_parent"; opt in when ready
+      },
       attachments: {
         enabled: false, // opt-in: set true to allow inline file attachments
         maxTotalBytes: 5242880, // 5 MB total across all files
@@ -2104,6 +2107,7 @@ Controls inline attachment support for `sessions_spawn`.
 
 Notes:
 
+- `forkParent.enabled` defaults to `false`. `sessions_spawn({ contextMode: "fork_parent" })` is rejected until you opt in, and setting it back to `false` is the rollout kill switch.
 - Attachments are only supported for `runtime: "subagent"`. ACP runtime rejects them.
 - Files are materialized into the child workspace at `.openclaw/attachments/<uuid>/` with a `.manifest.json`.
 - Attachment content is automatically redacted from transcript persistence.

@@ -296,6 +296,8 @@ Interface details:
 - `task` (required): initial prompt sent to the ACP session.
 - `runtime` (required for ACP): must be `"acp"`.
 - `agentId` (optional): ACP target harness id. Falls back to `acp.defaultAgent` if set.
+- `contextMode` (optional): `fresh` (default) or `fork_parent`. `fork_parent` forks the current OpenClaw parent transcript into the child session before ACP runtime init.
+- `inheritParentTranscript` (optional): boolean compatibility alias for `contextMode: "fork_parent"`.
 - `thread` (optional, default `false`): request thread binding flow where supported.
 - `mode` (optional): `run` (one-shot) or `session` (persistent).
   - default is `run`
@@ -304,8 +306,13 @@ Interface details:
 - `cwd` (optional): requested runtime working directory (validated by backend/runtime policy).
 - `label` (optional): operator-facing label used in session/banner text.
 - `resumeSessionId` (optional): resume an existing ACP session instead of creating a new one. The agent replays its conversation history via `session/load`. Requires `runtime: "acp"`.
+- `resumeSessionId` is incompatible with `contextMode: "fork_parent"` because one path resumes an existing ACP runtime session while the other forks the current OpenClaw parent transcript into a new child.
 - `streamTo` (optional): `"parent"` streams initial ACP run progress summaries back to the requester session as system events.
   - When available, accepted responses include `streamLogPath` pointing to a session-scoped JSONL log (`<sessionId>.acp-stream.jsonl`) you can tail for full relay history.
+
+Rollout note:
+
+- `contextMode: "fork_parent"` is disabled until `tools.sessions_spawn.forkParent.enabled` is set to `true`. Keep that config as the kill switch for ACP parent-context inheritance.
 
 ### Resume an existing session
 

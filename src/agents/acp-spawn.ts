@@ -58,6 +58,11 @@ import {
 } from "./acp-spawn-parent-stream.js";
 import { resolveAgentConfig, resolveDefaultAgentId } from "./agent-scope.js";
 import { resolveSandboxRuntimeStatus } from "./sandbox/runtime-status.js";
+import {
+  assertSpawnChildSessionContextModeAllowed,
+  type SpawnSessionContextMode,
+  materializeSpawnChildSessionContext,
+} from "./spawn-session-context.js";
 import { resolveInternalSessionKey, resolveMainSessionAlias } from "./tools/sessions-helpers.js";
 
 const log = createSubsystemLogger("agents/acp-spawn");
@@ -73,6 +78,7 @@ export type SpawnAcpParams = {
   task: string;
   label?: string;
   agentId?: string;
+  contextMode?: SpawnSessionContextMode;
   resumeSessionId?: string;
   cwd?: string;
   mode?: SpawnAcpMode;
@@ -791,6 +797,12 @@ export async function spawnAcpDirect(
       error: 'sessions_spawn streamTo="parent" requires an active requester session context.',
     };
   }
+  if (params.contextMode === "fork_parent" && params.resumeSessionId?.trim()) {
+    return {
+      status: "error",
+      error: 'resumeSessionId is incompatible with contextMode="fork_parent".',
+    };
+  }
 
   let requestThreadBinding = params.thread === true;
   const runtimePolicyError = resolveAcpSpawnRuntimePolicyError({
@@ -849,6 +861,20 @@ export async function spawnAcpDirect(
   }
 
   const sessionKey = `agent:${targetAgentId}:acp:${crypto.randomUUID()}`;
+  try {
+    assertSpawnChildSessionContextModeAllowed({
+      cfg,
+      contextMode: params.contextMode,
+      parentSessionKey: requesterInternalKey,
+      childSessionKey: sessionKey,
+    });
+  } catch (err) {
+    return {
+      status: "error",
+      error: summarizeError(err),
+      childSessionKey: sessionKey,
+    };
+  }
   const runtimeMode = resolveAcpSessionMode(spawnMode);
 
   let preparedBinding: PreparedAcpThreadBinding | null = null;
@@ -884,6 +910,12 @@ export async function spawnAcpDirect(
       timeoutMs: 10_000,
     });
     sessionCreated = true;
+    await materializeSpawnChildSessionContext({
+      cfg,
+      contextMode: params.contextMode,
+      parentSessionKey: requesterInternalKey,
+      childSessionKey: sessionKey,
+    });
     const initializedSession = await initializeAcpSpawnRuntime({
       cfg,
       sessionKey,

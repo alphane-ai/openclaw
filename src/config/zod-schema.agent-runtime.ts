@@ -896,6 +896,12 @@ export const ToolsSchema = z
           })
           .strict()
           .optional(),
+        forkParent: z
+          .object({
+            enabled: z.boolean().optional(),
+          })
+          .strict()
+          .optional(),
       })
       .strict()
       .optional(),

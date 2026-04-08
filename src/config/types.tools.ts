@@ -591,6 +591,30 @@ export type ToolsConfig = {
      */
     visibility?: SessionsToolsVisibility;
   };
+  /** sessions_spawn-specific safety controls. */
+  sessions_spawn?: {
+    /** Inline attachments for subagent spawns. */
+    attachments?: {
+      /** Enable inline attachments (default: false). */
+      enabled?: boolean;
+      /** Max bytes across all inline attachment files. */
+      maxTotalBytes?: number;
+      /** Max number of attachment files. */
+      maxFiles?: number;
+      /** Max bytes per attachment file. */
+      maxFileBytes?: number;
+      /** Keep attachment files when cleanup="keep". */
+      retainOnSessionKeep?: boolean;
+    };
+    /** Parent-transcript inheritance for sessions_spawn contextMode="fork_parent". */
+    forkParent?: {
+      /**
+       * Enable parent transcript forking for child sessions.
+       * Default: false.
+       */
+      enabled?: boolean;
+    };
+  };
   /** Elevated exec permissions for the host machine. */
   elevated?: {
     /** Enable or disable elevated mode (default: true). */

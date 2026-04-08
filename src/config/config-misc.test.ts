@@ -135,6 +135,21 @@ describe("plugins.entries.*.subagent", () => {
   });
 });
 
+describe("tools.sessions_spawn.forkParent", () => {
+  it("accepts an explicit enabled flag", () => {
+    const result = OpenClawSchema.safeParse({
+      tools: {
+        sessions_spawn: {
+          forkParent: {
+            enabled: true,
+          },
+        },
+      },
+    });
+    expect(result.success).toBe(true);
+  });
+});
+
 describe("web search provider config", () => {
   it("accepts kimi provider and config", () => {
     const res = validateConfigObject(

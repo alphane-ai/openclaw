@@ -7006,6 +7006,15 @@ export const GENERATED_BASE_CONFIG_SCHEMA = {
                 },
                 additionalProperties: false,
               },
+              forkParent: {
+                type: "object",
+                properties: {
+                  enabled: {
+                    type: "boolean",
+                  },
+                },
+                additionalProperties: false,
+              },
             },
             additionalProperties: false,
           },
@@ -12218,6 +12227,46 @@ export const GENERATED_BASE_CONFIG_SCHEMA = {
     "tools.sessions.visibility": {
       label: "Session Tools Visibility",
       help: 'Controls which sessions can be targeted by sessions_list/sessions_history/sessions_send. ("tree" default = current session + spawned subagent sessions; "self" = only current; "agent" = any session in the current agent id; "all" = any session; cross-agent still requires tools.agentToAgent).',
+      tags: ["storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments": {
+      label: "sessions_spawn Attachments",
+      help: "Inline attachment controls for sessions_spawn subagent runs. Keep disabled unless spawned workers must receive snapshot-by-value files.",
+      tags: ["storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments.enabled": {
+      label: "sessions_spawn Attachments Enabled",
+      help: "Enable inline attachments for sessions_spawn subagent runs. Default: false.",
+      tags: ["storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments.maxTotalBytes": {
+      label: "sessions_spawn Attachments Max Total Bytes",
+      help: "Maximum total attachment bytes accepted by a single sessions_spawn call before rejection.",
+      tags: ["performance", "storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments.maxFiles": {
+      label: "sessions_spawn Attachments Max Files",
+      help: "Maximum number of inline attachment files accepted by a single sessions_spawn call.",
+      tags: ["performance", "storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments.maxFileBytes": {
+      label: "sessions_spawn Attachments Max File Bytes",
+      help: "Maximum size allowed for any single inline attachment file in sessions_spawn.",
+      tags: ["performance", "storage", "tools"],
+    },
+    "tools.sessions_spawn.attachments.retainOnSessionKeep": {
+      label: "sessions_spawn Attachments Retain On Session Keep",
+      help: 'When true, keep materialized attachment files if the spawned session uses cleanup="keep".',
+      tags: ["storage", "tools"],
+    },
+    "tools.sessions_spawn.forkParent": {
+      label: "sessions_spawn Fork Parent",
+      help: 'Safety controls for sessions_spawn context inheritance. Use this to gate contextMode="fork_parent" rollouts.',
+      tags: ["storage", "tools"],
+    },
+    "tools.sessions_spawn.forkParent.enabled": {
+      label: "sessions_spawn Fork Parent Enabled",
+      help: 'Enable sessions_spawn contextMode="fork_parent". Default: false. Keep disabled until rollout, and use it as the kill switch if issues appear.',
       tags: ["storage", "tools"],
     },
     "tools.exec.notifyOnExit": {

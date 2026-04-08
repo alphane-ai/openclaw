@@ -25,6 +25,11 @@ import { AGENT_LANE_SUBAGENT } from "./lanes.js";
 import { resolveSubagentSpawnModelSelection } from "./model-selection.js";
 import { resolveSandboxRuntimeStatus } from "./sandbox/runtime-status.js";
 import {
+  assertSpawnChildSessionContextModeAllowed,
+  type SpawnSessionContextMode,
+  materializeSpawnChildSessionContext,
+} from "./spawn-session-context.js";
+import {
   mapToolContextToSpawnedRunMetadata,
   normalizeSpawnedRunMetadata,
   resolveSpawnedWorkspaceInheritance,
@@ -72,6 +77,7 @@ export type SpawnSubagentParams = {
   task: string;
   label?: string;
   agentId?: string;
+  contextMode?: SpawnSessionContextMode;
   model?: string;
   thinking?: string;
   runTimeoutSeconds?: number;
@@ -505,6 +511,20 @@ export async function spawnSubagentDirect(
     depth: childDepth,
     maxSpawnDepth,
   });
+  try {
+    assertSpawnChildSessionContextModeAllowed({
+      cfg,
+      contextMode: params.contextMode,
+      parentSessionKey: requesterInternalKey,
+      childSessionKey,
+    });
+  } catch (err) {
+    return {
+      status: "error",
+      error: summarizeError(err),
+      childSessionKey,
+    };
+  }
   const targetAgentConfig = resolveAgentConfig(cfg, targetAgentId);
   const resolvedModel = resolveSubagentSpawnModelSelection({
     cfg,
@@ -560,6 +580,24 @@ export async function spawnSubagentDirect(
     return {
       status: "error",
       error: initialPatchError,
+      childSessionKey,
+    };
+  }
+  try {
+    await materializeSpawnChildSessionContext({
+      cfg,
+      contextMode: params.contextMode,
+      parentSessionKey: requesterInternalKey,
+      childSessionKey,
+    });
+  } catch (err) {
+    await cleanupFailedSpawnBeforeAgentStart({
+      childSessionKey,
+      deleteTranscript: true,
+    });
+    return {
+      status: "error",
+      error: summarizeError(err),
       childSessionKey,
     };
   }

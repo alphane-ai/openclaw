@@ -53,9 +53,13 @@ non-blocking -- it returns immediately with a `runId` and `childSessionKey`.
 Key options:
 
 - `runtime: "subagent"` (default) or `"acp"` for external harness agents.
+- `contextMode: "fresh"` (default) or `"fork_parent"` to fork the current session transcript into the child before it starts.
+- `inheritParentTranscript: true` as a compatibility alias for `contextMode: "fork_parent"`.
 - `model` and `thinking` overrides for the child session.
 - `thread: true` to bind the spawn to a chat thread (Discord, Slack, etc.).
 - `sandbox: "require"` to enforce sandboxing on the child.
+
+`contextMode: "fork_parent"` copies the current OpenClaw session transcript snapshot into the child and then lets the child continue independently. It does **not** create a live parent-child link, and it cannot be combined with `resumeSessionId`. For low-risk rollout, it is guarded by `tools.sessions_spawn.forkParent.enabled`, which defaults to `false`.
 
 Sub-agents get the full tool set minus session tools (no recursive spawning).
 After completion, an announce step posts the result to the requester's channel.

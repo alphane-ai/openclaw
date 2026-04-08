@@ -480,6 +480,40 @@ describe("spawnAcpDirect", () => {
     expect(transcriptCalls[1]?.threadId).toBe("child-thread");
   });
 
+  it("rejects resumeSessionId when fork_parent context is requested", async () => {
+    const result = await spawnAcpDirect(
+      createSpawnRequest({
+        contextMode: "fork_parent",
+        resumeSessionId: "7f4a78e0-f6be-43fe-855c-c1c4fd229bc4",
+      }),
+      createRequesterContext(),
+    );
+
+    expect(result).toMatchObject({
+      status: "error",
+    });
+    expect(result.error).toContain(
+      'resumeSessionId is incompatible with contextMode="fork_parent"',
+    );
+    expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
+  });
+
+  it("rejects fork_parent when the feature flag is disabled", async () => {
+    const result = await spawnAcpDirect(
+      createSpawnRequest({
+        contextMode: "fork_parent",
+      }),
+      createRequesterContext(),
+    );
+
+    expect(result).toMatchObject({
+      status: "error",
+      childSessionKey: expect.stringMatching(/^agent:codex:acp:/),
+    });
+    expect(result.error).toContain("forkParent.enabled");
+    expect(hoisted.callGatewayMock).not.toHaveBeenCalled();
+  });
+
   it("spawns Matrix thread-bound ACP sessions from top-level room targets", async () => {
     enableMatrixAcpThreadBindings();
     hoisted.sessionBindingBindMock.mockImplementationOnce(

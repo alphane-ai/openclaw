@@ -130,6 +130,8 @@ describe("sessions tools", () => {
     expect(schemaProp("sessions_spawn", "streamTo").type).toBe("string");
     expect(schemaProp("sessions_spawn", "runtime").type).toBe("string");
     expect(schemaProp("sessions_spawn", "cwd").type).toBe("string");
+    expect(schemaProp("sessions_spawn", "contextMode").type).toBe("string");
+    expect(schemaProp("sessions_spawn", "inheritParentTranscript").type).toBe("boolean");
     expect(schemaProp("subagents", "recentMinutes").type).toBe("number");
   });
 

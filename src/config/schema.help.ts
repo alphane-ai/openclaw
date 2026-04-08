@@ -677,6 +677,22 @@ export const FIELD_HELP: Record<string, string> = {
     "Restrict filesystem tools (read/write/edit/apply_patch) to the workspace directory (default: false).",
   "tools.sessions.visibility":
     'Controls which sessions can be targeted by sessions_list/sessions_history/sessions_send. ("tree" default = current session + spawned subagent sessions; "self" = only current; "agent" = any session in the current agent id; "all" = any session; cross-agent still requires tools.agentToAgent).',
+  "tools.sessions_spawn.attachments":
+    "Inline attachment controls for sessions_spawn subagent runs. Keep disabled unless spawned workers must receive snapshot-by-value files.",
+  "tools.sessions_spawn.attachments.enabled":
+    "Enable inline attachments for sessions_spawn subagent runs. Default: false.",
+  "tools.sessions_spawn.attachments.maxTotalBytes":
+    "Maximum total attachment bytes accepted by a single sessions_spawn call before rejection.",
+  "tools.sessions_spawn.attachments.maxFiles":
+    "Maximum number of inline attachment files accepted by a single sessions_spawn call.",
+  "tools.sessions_spawn.attachments.maxFileBytes":
+    "Maximum size allowed for any single inline attachment file in sessions_spawn.",
+  "tools.sessions_spawn.attachments.retainOnSessionKeep":
+    'When true, keep materialized attachment files if the spawned session uses cleanup="keep".',
+  "tools.sessions_spawn.forkParent":
+    'Safety controls for sessions_spawn context inheritance. Use this to gate contextMode="fork_parent" rollouts.',
+  "tools.sessions_spawn.forkParent.enabled":
+    'Enable sessions_spawn contextMode="fork_parent". Default: false. Keep disabled until rollout, and use it as the kill switch if issues appear.',
   "tools.message.allowCrossContextSend":
     "Legacy override: allow cross-context sends across all providers.",
   "tools.message.crossContext.allowWithinProvider":

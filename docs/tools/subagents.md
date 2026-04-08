@@ -81,6 +81,8 @@ Tool params:
 - `task` (required)
 - `label?` (optional)
 - `agentId?` (optional; spawn under another agent id if allowed)
+- `contextMode?` (`fresh|fork_parent`, default `fresh`; `fork_parent` forks the current OpenClaw session transcript snapshot into the child before the task starts)
+- `inheritParentTranscript?` (optional boolean alias for `contextMode: "fork_parent"`)
 - `model?` (optional; overrides the sub-agent model; invalid values are skipped and the sub-agent runs on the default model with a warning in the tool result)
 - `thinking?` (optional; overrides thinking level for the sub-agent run)
 - `runTimeoutSeconds?` (defaults to `agents.defaults.subagents.runTimeoutSeconds` when set, otherwise `0`; when set, the sub-agent run is aborted after N seconds)
@@ -92,6 +94,8 @@ Tool params:
 - `cleanup?` (`delete|keep`, default `keep`)
 - `sandbox?` (`inherit|require`, default `inherit`; `require` rejects spawn unless target child runtime is sandboxed)
 - `sessions_spawn` does **not** accept channel-delivery params (`target`, `channel`, `to`, `threadId`, `replyTo`, `transport`). For delivery, use `message`/`sessions_send` from the spawned run.
+
+`contextMode: "fork_parent"` keeps the requester in the original session and only forks a transcript snapshot into the child. The child then diverges normally from that snapshot. This path is gated by `tools.sessions_spawn.forkParent.enabled` so you can roll it out gradually and turn it off quickly if needed.
 
 ## Thread-bound sessions
 
